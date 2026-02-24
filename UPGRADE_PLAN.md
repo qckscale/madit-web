@@ -44,7 +44,7 @@ Update non-breaking packages:
 ---
 
 ## Stage 3 — CMS: Sanity 5 + React 19
-**Risk: Medium** | **Status: Not started**
+**Risk: Medium** | **Status: Completed**
 
 - `sanity` 3.99 → 5.12
 - `@sanity/vision` 3.99 → 5.12
