@@ -6,10 +6,10 @@ import { getImageDimensions } from "@sanity/asset-utils";
 import imageUrlBuilder from "@sanity/image-url";
 
 import "./BlockContent.scss";
-import { regularClient } from "@mi/sanity";
+import { client } from "@mi/sanity";
 import CodeBlock from "./CodeBlock";
 
-const builder = imageUrlBuilder(regularClient);
+const builder = imageUrlBuilder(client);
 export const urlFor = (source: any) => builder.image(source);
 const Image = ({ value }: { value: any }) => {
   const { width, height } = getImageDimensions(value);

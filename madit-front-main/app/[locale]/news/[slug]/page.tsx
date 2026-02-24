@@ -9,12 +9,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale } = await params;
-  const article = await client.fetch<any>({
-    query: BLOG_SEO(slug, locale || "en"),
-    config: {
-      next: { revalidate: 60 },
-    },
-  });
+  const article = await client.fetch<any>(
+    BLOG_SEO(slug, locale || "en"),
+    {},
+    { next: { revalidate: 60 } },
+  );
   return {
     title: article.seo?.title || article.title,
     description: article.seo?.content || article.ingress,
@@ -28,12 +27,7 @@ export default async function NewsDetailPage({
 }) {
   const { slug, locale } = await params;
   const [page] = await Promise.all([
-    client.fetch<any>({
-      query: GET_ONE_ARTICLES_GROQ(slug, locale || "en"),
-      config: {
-        next: { revalidate: 60 },
-      },
-    }),
+    client.fetch<any>(GET_ONE_ARTICLES_GROQ(slug, locale || "en"), {}, { next: { revalidate: 60 } }),
   ]);
   if (!page) notFound();
   return (

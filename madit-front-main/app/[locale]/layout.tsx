@@ -18,12 +18,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { locale } = await params;
-  const generalSettings = await client.fetch<any>({
-    query: HOME_PAGE_SEO(locale),
-    config: {
-      next: { revalidate: 60 },
-    },
-  });
+  const generalSettings = await client.fetch<any>(
+    HOME_PAGE_SEO(locale),
+    {},
+    { next: { revalidate: 60 } },
+  );
   return {
     title: generalSettings.seo.title,
     description: generalSettings.seo.content,
@@ -39,18 +38,8 @@ export default async function RootLayout({
 }) {
   const { locale } = await params;
   const [settings, services] = await Promise.all([
-    client.fetch<any>({
-      query: GENERAL_SETTINGS(locale),
-      config: {
-        next: { revalidate: 60 },
-      },
-    }),
-    client.fetch<any>({
-      query: SERVICE_GROQ(locale),
-      config: {
-        next: { revalidate: 60 },
-      },
-    }),
+    client.fetch<any>(GENERAL_SETTINGS(locale), {}, { next: { revalidate: 60 } }),
+    client.fetch<any>(SERVICE_GROQ(locale), {}, { next: { revalidate: 60 } }),
   ]);
 
   return (

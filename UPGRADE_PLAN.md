@@ -122,17 +122,20 @@ Update non-breaking packages:
 
 ---
 
-## Stage 7 — Frontend: @portabletext/react + cleanup
-**Risk: Medium** | **Status: Not started**
+## Stage 7 — Frontend: @portabletext/react v6 + remove next-sanity-client
+**Risk: Low** | **Status: Completed**
 
 - `@portabletext/react` 3.0 → 6.0
-- Consider removing `next-sanity-client` if `@sanity/client` covers its functionality (stage 6 already replaced `next-sanity` with `@sanity/client`)
+- Removed `next-sanity-client` — consolidated all fetching onto `@sanity/client`
 
 **Code changes:**
-- `shared/components/BlockContent.tsx`: review PortableText component API for v6 changes (component signatures may differ)
-- Review `sanity/calls.tsx` for any query helper changes
+- `package.json`: bumped `@portabletext/react` ^3.0.7 → ^6.0.0, removed `next-sanity-client`
+- `sanity/client.tsx`: removed `next-sanity-client` import + `SanityClient` instance, renamed `regularClient` → `client` (single `@sanity/client` export)
+- `shared/components/BlockContent.tsx`: `regularClient` → `client` import
+- 11 page/route files (17 call sites): converted `client.fetch({ query, config })` → `client.fetch(query, {}, { next: { revalidate: 60 } })` (positional args)
+- `app/api/sanity/route.tsx`: converted batch proxy `client.fetch(request)` → `client.fetch(request.query, request.params || {}, request.config)`
 
-**Verify:** All pages with Sanity content render correctly, rich text (block content) renders with images and code blocks, preview/draft mode works if used
+**Verify:** `npm run build` succeeds, `npm run lint` passes (0 errors, 10 pre-existing warnings)
 
 ---
 

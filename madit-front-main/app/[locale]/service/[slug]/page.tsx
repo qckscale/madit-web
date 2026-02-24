@@ -8,12 +8,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale } = await params;
-  const service = await client.fetch<any>({
-    query: SERVICE_SEO(slug, locale),
-    config: {
-      next: { revalidate: 60 },
-    },
-  });
+  const service = await client.fetch<any>(
+    SERVICE_SEO(slug, locale),
+    {},
+    { next: { revalidate: 60 } },
+  );
   if (!service) notFound();
 
   return {
@@ -29,12 +28,7 @@ export default async function ServiceDetailPage({
 }) {
   const { slug, locale } = await params;
   const [page] = await Promise.all([
-    client.fetch<any>({
-      query: GET_ONE_SERVICE_GROQ(slug, locale),
-      config: {
-        next: { revalidate: 60 },
-      },
-    }),
+    client.fetch<any>(GET_ONE_SERVICE_GROQ(slug, locale), {}, { next: { revalidate: 60 } }),
   ]);
   if (!page) notFound();
 

@@ -8,12 +8,7 @@ export default async function NewsPage({
 }) {
   const { locale } = await params;
   const [articles] = await Promise.all([
-    client.fetch<any[]>({
-      query: ARTICLES_GROQ(0, 20, locale || "en"),
-      config: {
-        next: { revalidate: 60 },
-      },
-    }),
+    client.fetch<any[]>(ARTICLES_GROQ(0, 20, locale || "en"), {}, { next: { revalidate: 60 } }),
   ]);
 
   return (

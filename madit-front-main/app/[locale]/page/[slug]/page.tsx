@@ -8,12 +8,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale } = await params;
-  const page = await client.fetch<any>({
-    query: PAGE_SEO(slug, locale || "en"),
-    config: {
-      next: { revalidate: 60 },
-    },
-  });
+  const page = await client.fetch<any>(
+    PAGE_SEO(slug, locale || "en"),
+    {},
+    { next: { revalidate: 60 } },
+  );
   if (!page) return {};
   return {
     title: page.seo?.title || page.title,
@@ -28,12 +27,7 @@ export default async function Page({
 }) {
   const { slug, locale } = await params;
   const [page] = await Promise.all([
-    client.fetch<any>({
-      query: PAGE_GROQ(slug, locale || "en"),
-      config: {
-        next: { revalidate: 60 },
-      },
-    }),
+    client.fetch<any>(PAGE_GROQ(slug, locale || "en"), {}, { next: { revalidate: 60 } }),
   ]);
   if (!page) notFound();
 

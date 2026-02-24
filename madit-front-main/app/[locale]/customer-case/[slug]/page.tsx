@@ -8,12 +8,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale } = await params;
-  const service = await client.fetch<any>({
-    query: WORK_SEO(slug, locale),
-    config: {
-      next: { revalidate: 60 },
-    },
-  });
+  const service = await client.fetch<any>(
+    WORK_SEO(slug, locale),
+    {},
+    { next: { revalidate: 60 } },
+  );
   if (!service) notFound();
 
   return {
@@ -29,12 +28,7 @@ export default async function CustomerCaseDetailPage({
 }) {
   const { slug, locale } = await params;
   const [page] = await Promise.all([
-    client.fetch<any>({
-      query: GET_ONE_CUSTOMER_CASE(slug, locale),
-      config: {
-        next: { revalidate: 60 },
-      },
-    }),
+    client.fetch<any>(GET_ONE_CUSTOMER_CASE(slug, locale), {}, { next: { revalidate: 60 } }),
   ]);
   if (!page) notFound();
 

@@ -17,10 +17,7 @@ export default async function Home({
 }) {
   const { locale } = await params;
   const [data] = await Promise.all([
-    client.fetch<any>({
-      query: HOMEPAGE_GROQ(locale),
-      config: { next: { revalidate: 60 } },
-    }),
+    client.fetch<any>(HOMEPAGE_GROQ(locale), {}, { next: { revalidate: 60 } }),
   ]);
   const { page, articles, work, authors, testimonials } = data;
 

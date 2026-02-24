@@ -11,10 +11,7 @@ async function getSitemap(locale = "sv"): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.BASE_URL;
 
   const [{ page, articles, services, work }] = await Promise.all([
-    client.fetch<any>({
-      query: SITEMAP_GROQ(locale),
-      config: { next: { revalidate: 60 } },
-    }),
+    client.fetch<any>(SITEMAP_GROQ(locale), {}, { next: { revalidate: 60 } }),
   ]);
 
   return [

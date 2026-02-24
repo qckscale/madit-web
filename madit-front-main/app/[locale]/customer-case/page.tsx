@@ -15,12 +15,7 @@ export default async function CustomerCase({
 }) {
   const { locale } = await params;
   const [work] = await Promise.all([
-    client.fetch<any>({
-      query: ALL_WORK_GROQ(locale || "en"),
-      config: {
-        next: { revalidate: 60 },
-      },
-    }),
+    client.fetch<any>(ALL_WORK_GROQ(locale || "en"), {}, { next: { revalidate: 60 } }),
   ]);
 
   return (
