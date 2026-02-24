@@ -44,3 +44,6 @@ madit-cms-main/logs/
 # DS DS_Store
 .DS_Store
 **/.DS_Store
+
+*.tar.gz
+**/*.tar.gz
