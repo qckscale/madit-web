@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@azure/communication-email": "^1.0.0",
+    "@azure/communication-email": "^1.1.0",
     "@formatjs/intl-localematcher": "^0.4.2",
     "@portabletext/react": "^3.0.7",
     "@types/node": "20.5.6",
@@ -17,20 +17,20 @@
     "@types/react-dom": "18.2.7",
     "eslint": "8.48.0",
     "eslint-config-next": "^14.0.4",
-    "highlight.js": "^11.9.0",
+    "highlight.js": "^11.11.0",
     "js-cookie": "^3.0.5",
     "negotiator": "^0.6.3",
     "next": "^14.0.4",
     "next-sanity": "^7.0.4",
-    "next-sanity-client": "^1.0.7",
+    "next-sanity-client": "^1.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.66.1",
+    "sass": "^1.97.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
-    "@types/negotiator": "^0.6.1",
+    "@types/negotiator": "^0.6.4",
     "next-devtools-mcp": "^0.3.10"
   }
 }
