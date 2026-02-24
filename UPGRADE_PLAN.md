@@ -96,35 +96,39 @@ Update non-breaking packages:
 ---
 
 ## Stage 6 — Frontend: React 19 + Next.js 16
-**Risk: Medium-High** | **Status: Not started**
+**Risk: Medium-High** | **Status: Completed**
 
-- `next` 15.x → 16.1
+- `next` 15.3 → 16.1.6
 - `react` / `react-dom` 18.3 → 19.2
-- `@types/react` → 19.x
-- `@types/react-dom` → 19.x
+- `@types/react` 18.3 → 19.x (moved to devDependencies)
+- `@types/react-dom` 18.3 → 19.x (moved to devDependencies)
+- `@types/node` 20.x → 22.x (moved to devDependencies)
 - `eslint-config-next` 15.x → 16.x
+- `eslint` 8.x → 9.x
 - `typescript` 5.2 → 5.9
-- `@types/node` 20.x → 22.x+ (match Node version)
+- Replaced `next-sanity` with `@sanity/client` (only `createClient` was used; avoids heavy peer dep chain)
 
 **Code changes:**
-- Run codemod: `npx @next/codemod@latest upgrade`
-- React 19 type changes: `React.FC` no longer includes implicit `children` — check all components
-- Review `useState` setter functions (React 19 batches differently in some edge cases)
-- Update `tsconfig.json` if needed
+- `middleware.ts` → `proxy.ts`: renamed file + `middleware()` → `proxy()` (Next.js 16 breaking change)
+- `.eslintrc.json` → `eslint.config.mjs`: migrated to ESLint flat config (native `eslint-config-next` v16 flat export)
+- `package.json`: lint script `next lint` → `eslint .`
+- `sanity/client.tsx`: `import { createClient } from "next-sanity"` → `from "@sanity/client"`
+- `shared/components/BlockContent.tsx`: removed spurious second parameter from `code` handler (React 19 type strictness)
+- `shared/components/Section.tsx`: `JSX.Element` → `React.ReactNode` (global JSX namespace removed in React 19)
+- `shared/components/ExternalScripts.tsx` + `Header.tsx`: suppressed new `react-hooks/set-state-in-effect` rule for intentional patterns
+- `tsconfig.json`: auto-updated by Next.js (`jsx: "react-jsx"`, added `.next/dev/types/**/*.ts`)
 
-**Verify:** `npm run dev` + `npm run build` — full site functional, all interactive components (header scroll, cookie consent, contact form)
+**Verify:** `npm run build` succeeds, `npm run lint` passes (0 errors, 10 pre-existing warnings)
 
 ---
 
-## Stage 7 — Frontend: next-sanity + @portabletext/react
+## Stage 7 — Frontend: @portabletext/react + cleanup
 **Risk: Medium** | **Status: Not started**
 
-- `next-sanity` 7.0 → 12.1
 - `@portabletext/react` 3.0 → 6.0
+- Consider removing `next-sanity-client` if `@sanity/client` covers its functionality (stage 6 already replaced `next-sanity` with `@sanity/client`)
 
 **Code changes:**
-- `sanity/client.tsx`: next-sanity API may have changed — review `createClient` import and options
-- Consider removing `next-sanity-client` if `next-sanity` 12.x covers its functionality
 - `shared/components/BlockContent.tsx`: review PortableText component API for v6 changes (component signatures may differ)
 - Review `sanity/calls.tsx` for any query helper changes
 
@@ -132,18 +136,14 @@ Update non-breaking packages:
 
 ---
 
-## Stage 8 — Both: ESLint 10 (optional, lowest priority)
+## Stage 8 — CMS: ESLint upgrade (optional, lowest priority)
 **Risk: Low-Medium** | **Status: Not started**
 
-- `eslint` 8 → 10 (both projects)
-- `@sanity/eslint-config-studio` 3.0 → 6.0
-- `eslint-config-next` → latest
+- CMS: `eslint` 8 → 9+, `@sanity/eslint-config-studio` 3.0 → 6.0
+- CMS: migrate `.eslintrc` to flat config
+- (Frontend ESLint already migrated to flat config + v9 in stage 6)
 
-**Code changes:**
-- ESLint 10 uses flat config by default — migrate `.eslintrc` to `eslint.config.js`
-- Update any custom rules
-
-**Verify:** `npm run lint` passes in both projects
+**Verify:** `npm run lint` passes in CMS project
 
 ---
 

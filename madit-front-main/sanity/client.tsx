@@ -1,5 +1,5 @@
 import SanityClient from "next-sanity-client";
-import { createClient } from "next-sanity";
+import { createClient } from "@sanity/client";
 
 export const regularClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",

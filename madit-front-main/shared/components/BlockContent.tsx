@@ -43,7 +43,7 @@ export default function BlockContent({ content, className }: any) {
           // ...
           types: {
             image: Image,
-            code: (props: any, value) => {
+            code: (props: any) => {
               return <CodeBlock code={props.value.code} />;
             },
           },

@@ -21,7 +21,7 @@ export function ExternalScripts({
   };
 
   useEffect(() => {
-    setHasMounted(true);
+    setHasMounted(true); // eslint-disable-line react-hooks/set-state-in-effect -- intentional: client-only rendering to avoid hydration mismatch
   }, []);
 
   if (!hasMounted) return;

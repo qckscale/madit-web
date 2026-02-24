@@ -32,7 +32,7 @@ export function Header() {
   }, [prevScrollPos]);
 
   useEffect(() => {
-    setIsOpen(false);
+    setIsOpen(false); // eslint-disable-line react-hooks/set-state-in-effect -- intentional: close menu on navigation
   }, [pathname]);
   return (
     <nav
