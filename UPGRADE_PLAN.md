@@ -139,14 +139,15 @@ Update non-breaking packages:
 
 ---
 
-## Stage 8 — CMS: ESLint upgrade (optional, lowest priority)
-**Risk: Low-Medium** | **Status: Not started**
+## Stage 8 — CMS: ESLint upgrade (ESLint 9 + Flat Config)
+**Risk: Low-Medium** | **Status: Completed**
 
-- CMS: `eslint` 8 → 9+, `@sanity/eslint-config-studio` 3.0 → 6.0
-- CMS: migrate `.eslintrc` to flat config
-- (Frontend ESLint already migrated to flat config + v9 in stage 6)
+- `eslint` 8.57 → 9.x
+- `@sanity/eslint-config-studio` 3.0 → 6.0
+- Migrated `.eslintrc` → `eslint.config.mjs` (flat config)
+- Added `"lint": "eslint ."` script to `package.json`
 
-**Verify:** `npm run lint` passes in CMS project
+**Verify:** `npm run lint` passes (0 errors, 1 pre-existing warning)
 
 ---
 
