@@ -1,0 +1,73 @@
+import { HOMEPAGE_GROQ, client } from "@mi/sanity";
+import "./page.scss";
+import { Services } from "@mi/shared/components/Services";
+import Link from "next/link";
+import { News } from "@mi/shared/components/News";
+import { ContactForm } from "@mi/shared/components/ContactForm";
+import { i18Link } from "@mi/shared/utils/lang/getLink";
+import Employees from "@mi/shared/components/Employees";
+import { Clouds } from "@mi/shared/icons";
+import Work from "@mi/shared/components/Work";
+import Testimonials from "@mi/shared/components/Testimonials";
+
+export default async function Home({
+  params,
+}: {
+  params: { locale: "en" | "sv" };
+}) {
+  const [data] = await Promise.all([
+    client.fetch<any>({
+      query: HOMEPAGE_GROQ(params.locale),
+      config: { next: { revalidate: 60 } },
+    }),
+  ]);
+  const { page, articles, work, authors, testimonials } = data;
+
+  return (
+    <main className="homepage-container">
+      <section
+        className="hero-section clouds"
+        style={{
+          background: `url(${page.homePage.heroImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      >
+        <div className="container-width">
+          <div className="hero-section__content">
+            <h1
+              className="hero-section__title"
+              dangerouslySetInnerHTML={{ __html: page.homePage.title }}
+            ></h1>
+            <div className="hero-section__cta">
+              <Link tabIndex={-1} href={i18Link("contact", params.locale)}>
+                <button className="primary">{page.homePage.ctaPrimary}</button>
+              </Link>
+              <Link
+                tabIndex={-1}
+                href={i18Link("page/about-us", params.locale)}
+              >
+                <button className="secondary">
+                  {page.homePage.ctaSecondary}
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div className="inner-home">
+        <Services isHome services={page.homePage.services} />
+        <Work isHome work={work} />
+        <Clouds />
+        <News isHome title={page.homePage.newsTitle} articles={articles} />
+        <Employees consultants={authors} />
+        <ContactForm services={page.homePage.services} />
+        <Testimonials
+          title={page.homePage.testimonialTitle}
+          subtitle={page.homePage.testimonialSubtitle}
+          testimonials={testimonials}
+        />
+      </div>
+    </main>
+  );
+}

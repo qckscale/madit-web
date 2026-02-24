@@ -1,0 +1,28 @@
+import { SERVICE_GROQ, client } from "@mi/sanity";
+import { Services } from "@mi/shared/components/Services";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services | MadIT",
+};
+
+export default async function Home({
+  params,
+}: {
+  params: { locale: "en" | "sv" };
+}) {
+  const [services] = await Promise.all([
+    client.fetch<any>({
+      query: SERVICE_GROQ(params.locale || "en"),
+      config: {
+        next: { revalidate: 60 },
+      },
+    }),
+  ]);
+
+  return (
+    <>
+      <Services topMargin={false} services={services} />
+    </>
+  );
+}

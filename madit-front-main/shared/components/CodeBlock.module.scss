@@ -1,0 +1,22 @@
+.codeBlockToolbar {
+  background: #9b76d5;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 2px solid #000;
+  button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #000;
+    padding: 4px 30px;
+    gap: 8px;
+  }
+}
+.codeBlock {
+  margin-top: 0;
+  padding: 30px;
+  border-radius: 0 0 10px 10px;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background: #2c194b;
+  overflow: auto;
+}

@@ -1,0 +1,60 @@
+@import "../../app/variables";
+
+.cookieConsent {
+  box-sizing: border-box;
+  margin: 16px auto;
+  position: fixed;
+  padding: 0 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  max-width: 1400px;
+  background: $primary-inverted;
+  padding: 0 16px;
+  color: $primary;
+  z-index: 20;
+  transform: translate(0, 0);
+  opacity: 1;
+  animation: slideUp 0.5s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  @include mobile {
+    padding: 8px;
+    margin: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translate(0, 100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+}
+.cookieConsentContent {
+  box-sizing: border-box;
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  align-items: center;
+
+  button {
+    margin-top: 0;
+  }
+  @include mobile {
+    font-size: 0.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.cookieConsentLink {
+  color: $primary;
+}

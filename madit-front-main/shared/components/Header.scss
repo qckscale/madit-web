@@ -1,0 +1,155 @@
+@import "../../app/variables.scss";
+
+nav {
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+  position: sticky;
+
+  &.is-sticky {
+    margin-top: 0;
+    top: 0;
+    z-index: 100;
+    background: $primary;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: 0.2s ease-in-out;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @include mobile {
+    padding: 0;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.12px;
+    text-underline-offset: 6px;
+
+    &:hover {
+      color: #f1f1f1;
+      text-decoration: underline;
+    }
+  }
+
+  .logotype {
+    display: block;
+    max-width: 180px;
+    @include mobile {
+      max-width: 140px;
+      max-height: 70px;
+    }
+  }
+
+  .menu-list-gutter {
+    gap: 24px;
+    @include mobile {
+      width: 100%;
+      left: 0;
+      position: absolute;
+      display: none;
+      top: 100%;
+
+      &.is-open {
+        display: block;
+      }
+
+      a {
+        width: 100%;
+        padding: 20px;
+        background: $primary;
+        text-align: left;
+        border-top: 1px solid rgba(0, 0, 0, 0.3);
+        &:last-of-type {
+          border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+  }
+}
+
+.hide-on-mob {
+  @include mobile {
+    display: none;
+  }
+}
+
+.buger-item {
+  display: none;
+  @include mobile {
+    display: block;
+  }
+  .burger {
+    all: unset;
+    height: 50px;
+    display: inline;
+    margin-left: 24px;
+
+    &.is-open {
+      .burger-line:first-of-type {
+        transform: rotate(45deg);
+      }
+      .burger-line:last-of-type {
+        transform: rotate(-45deg);
+        width: 38px;
+        margin-top: -10px;
+      }
+    }
+
+    .burger-line {
+      height: 2px;
+      width: 38px;
+      border-radius: 4px;
+      background-color: white;
+      margin-bottom: 8px;
+      transition: 0.2s ease-in;
+
+      &:last-child {
+        width: 28px;
+      }
+    }
+  }
+}
+
+.language {
+  color: white;
+  fill: white;
+}
+
+.language-list {
+  position: absolute;
+  top: 100%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  right: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  min-width: 100px;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  a {
+    text-align: left;
+    color: white;
+    font-size: 1rem;
+  }
+
+  li {
+    button {
+      padding: 10px;
+      box-sizing: border-box;
+      width: 100%;
+      display: block;
+    }
+  }
+}

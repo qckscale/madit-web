@@ -1,0 +1,44 @@
+@import "../../app/variables.scss";
+
+.homepage-container {
+  overflow: hidden;
+}
+.hero-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+
+  @include mobile {
+    background-position: center top -180px;
+  }
+
+  .hero-section__content {
+    display: flex;
+    height: calc(100vh + 200px);
+    letter-spacing: -2%;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      color: white;
+      margin-top: 0;
+      font-size: 75px;
+      font-weight: 700;
+      letter-spacing: -2px;
+
+      @include mobile {
+        font-size: 40px;
+      }
+    }
+  }
+  .hero-section__cta {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-right: 12px;
+    }
+  }
+}

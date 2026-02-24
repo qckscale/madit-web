@@ -1,0 +1,41 @@
+.testimonialHeader {
+  text-align: center;
+  color: var(--white);
+}
+.testimonials {
+  margin-top: 100px;
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
+
+  .testimonialContent {
+    padding: 30px;
+    text-align: center;
+
+    h3 {
+      margin: -20px 0 0;
+    }
+    h4 {
+      margin: 10px 0;
+      color: #555;
+      font-weight: 400;
+    }
+    p {
+      margin: 10px 0;
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+    img {
+      transform: translate(0, -50%);
+      border: 8px solid var(--primary);
+      display: block;
+      border-radius: 50%;
+      margin: 0 auto;
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      object-position: center top;
+    }
+  }
+}

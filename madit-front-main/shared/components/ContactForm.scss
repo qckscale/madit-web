@@ -1,0 +1,65 @@
+@import "../../app/variables";
+.section-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+
+  @include mobile {
+    flex-wrap: wrap;
+  }
+
+  .contact-form__image {
+    width: 50%;
+    img {
+      width: 100%;
+    }
+
+    @include mobile {
+      width: calc(100%);
+    }
+  }
+
+  .contact-form__form {
+    width: 50%;
+
+    @include mobile {
+      width: calc(100%);
+    }
+  }
+}
+
+select,
+label,
+textarea,
+input {
+  width: 100%;
+  display: block;
+}
+
+label {
+  font-weight: 300;
+  color: white;
+  margin-bottom: 4px;
+}
+select,
+input,
+textarea {
+  box-sizing: border-box;
+  border: 0;
+  background: #e9c9ff;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+textarea {
+  min-height: 70px;
+}
+button {
+  margin-top: 20px;
+}
+
+.submit-success {
+  color: white;
+  font-size: 18px;
+}

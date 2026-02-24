@@ -1,0 +1,97 @@
+@import "../../app/variables.scss";
+
+footer {
+  margin-top: 500px;
+  display: flex;
+  width: 100%;
+  padding-bottom: 80px;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-content {
+    gap: 60px;
+    @include tablet {
+      flex-wrap: wrap;
+    }
+  }
+  .footer-item {
+    color: white;
+    white-space: nowrap;
+    @include tablet {
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    &:first-child {
+      width: 50%;
+
+      @include tablet {
+        width: 100%;
+      }
+    }
+
+    .company-detail-item {
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      color: white;
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+      margin-top: 0;
+
+      @include mobile {
+        margin-bottom: 12px;
+        width: 100%;
+      }
+    }
+
+    a {
+      color: white;
+      margin-bottom: 10px;
+      display: block;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.copyright {
+  background: #3c2462;
+  padding: 25px 0;
+  color: white;
+
+  @include mobile {
+    width: 100%;
+  }
+
+  .copyright-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+  .social-icons {
+    @include mobile {
+      margin: 30px auto 0;
+    }
+    a {
+      margin-left: 20px;
+    }
+  }
+}
+.footer-double-lists {
+  gap: 30px;
+  @include mobile {
+    flex-wrap: wrap;
+  }
+}

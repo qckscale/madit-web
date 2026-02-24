@@ -1,0 +1,65 @@
+@import "../../app/variables.scss";
+.services {
+  position: relative;
+  z-index: 1;
+  &:not(.block-mt) {
+    margin-top: calc(100vh + 300px);
+  }
+  margin-bottom: 120px;
+
+  .services__item__icon {
+    margin-bottom: 16px;
+    width: 64px;
+    height: 64px;
+  }
+  .services__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    .services__item {
+      padding: 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      background: #e9c9ff;
+      color: #000;
+      box-sizing: border-box;
+      width: calc((100% / 3) - 22.5px);
+
+      @include tablet {
+        width: calc(50% - 15px);
+      }
+      @include mobile {
+        width: calc(100%);
+      }
+
+      &:hover {
+        opacity: 0.7;
+        cursor: pointer;
+        transition: 0.2s ease-in;
+      }
+      .heading-3 {
+        margin-top: 0;
+        color: #000;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+
+      &:first-child {
+        color: white;
+        background: #8616d1;
+
+        .heading-3 {
+          color: white;
+        }
+      }
+      .services__item__description {
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-top: 12px;
+      }
+    }
+  }
+}

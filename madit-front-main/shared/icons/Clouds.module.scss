@@ -1,0 +1,17 @@
+.clouds {
+  position: absolute;
+  z-index: -1;
+  height: 1000px;
+  left: 0;
+  transform: translate(-30%, 0);
+
+  &.inverted {
+    transform: translate(30%, 0) rotate(180deg);
+    left: auto;
+    right: 0;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}

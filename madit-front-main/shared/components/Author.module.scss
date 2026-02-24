@@ -1,0 +1,60 @@
+@import "../../app/variables";
+.author {
+  display: flex;
+  gap: 30px;
+  border-top: 1px solid $primary-faded;
+  margin-top: 40px;
+  padding-top: 40px;
+  .authorImageWrapper {
+    img {
+      display: block;
+      height: 120px;
+      border-radius: 8px;
+    }
+  }
+
+  .authorContentWrapper {
+    .authorName {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $primary-inverted;
+      margin: 0;
+    }
+    .authorTitle {
+      margin-top: 16px;
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-bottom: 0;
+      color: $primary-inverted;
+    }
+    .publishDate {
+      margin: 8px 0;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: $primary-inverted;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  .authorBadge {
+    background: #2c194b;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    margin: 0;
+    color: white;
+    border-radius: 10px;
+  }
+
+  .authorMeta {
+    align-items: center;
+    gap: 10px;
+    display: flex;
+    margin-bottom: 20px;
+  }
+}

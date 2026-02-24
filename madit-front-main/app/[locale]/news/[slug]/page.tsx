@@ -1,0 +1,48 @@
+import { BLOG_SEO, GET_ONE_ARTICLES_GROQ, client } from "@mi/sanity";
+import Author from "@mi/shared/components/Author";
+import BlockContent from "@mi/shared/components/BlockContent";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string; locale: "en" | "sv" };
+}) {
+  const article = await client.fetch<any>({
+    query: BLOG_SEO(params.slug, params.locale || "en"),
+    config: {
+      next: { revalidate: 60 },
+    },
+  });
+  return {
+    title: article.seo?.title || article.title,
+    description: article.seo?.content || article.ingress,
+  };
+}
+
+export default async function NewsDetailPage({
+  params,
+}: {
+  params: { slug: string; locale: "en" | "sv" };
+}) {
+  const [page] = await Promise.all([
+    client.fetch<any>({
+      query: GET_ONE_ARTICLES_GROQ(params.slug, params.locale || "en"),
+      config: {
+        next: { revalidate: 60 },
+      },
+    }),
+  ]);
+  if (!page) notFound();
+  return (
+    <>
+      <div className="container-width container-width-page small">
+        <h1 className="heading-2">{page.title}</h1>
+        <BlockContent content={page.content}></BlockContent>
+        {page.author && (
+          <Author {...page.author} publishedAt={page.publishedAt} />
+        )}
+      </div>
+    </>
+  );
+}
