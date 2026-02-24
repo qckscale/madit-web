@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 export default async function ContactPage({
   params,
 }: {
-  params: { locale: "en" | "sv" };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const [services] = await Promise.all([
     client.fetch<any>({
-      query: SERVICE_GROQ(params.locale || "en"),
+      query: SERVICE_GROQ(locale || "en"),
       config: {
         next: { revalidate: 60 },
       },

@@ -4,11 +4,12 @@ import { News } from "@mi/shared/components/News";
 export default async function NewsPage({
   params,
 }: {
-  params: { locale: "en" | "sv" };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const [articles] = await Promise.all([
     client.fetch<any[]>({
-      query: ARTICLES_GROQ(0, 20, params.locale || "en"),
+      query: ARTICLES_GROQ(0, 20, locale || "en"),
       config: {
         next: { revalidate: 60 },
       },

@@ -6,10 +6,11 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string; locale: "en" | "sv" };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { slug, locale } = await params;
   const article = await client.fetch<any>({
-    query: BLOG_SEO(params.slug, params.locale || "en"),
+    query: BLOG_SEO(slug, locale || "en"),
     config: {
       next: { revalidate: 60 },
     },
@@ -23,11 +24,12 @@ export async function generateMetadata({
 export default async function NewsDetailPage({
   params,
 }: {
-  params: { slug: string; locale: "en" | "sv" };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { slug, locale } = await params;
   const [page] = await Promise.all([
     client.fetch<any>({
-      query: GET_ONE_ARTICLES_GROQ(params.slug, params.locale || "en"),
+      query: GET_ONE_ARTICLES_GROQ(slug, locale || "en"),
       config: {
         next: { revalidate: 60 },
       },

@@ -13,11 +13,12 @@ import Testimonials from "@mi/shared/components/Testimonials";
 export default async function Home({
   params,
 }: {
-  params: { locale: "en" | "sv" };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const [data] = await Promise.all([
     client.fetch<any>({
-      query: HOMEPAGE_GROQ(params.locale),
+      query: HOMEPAGE_GROQ(locale),
       config: { next: { revalidate: 60 } },
     }),
   ]);
@@ -40,12 +41,12 @@ export default async function Home({
               dangerouslySetInnerHTML={{ __html: page.homePage.title }}
             ></h1>
             <div className="hero-section__cta">
-              <Link tabIndex={-1} href={i18Link("contact", params.locale)}>
+              <Link tabIndex={-1} href={i18Link("contact", locale)}>
                 <button className="primary">{page.homePage.ctaPrimary}</button>
               </Link>
               <Link
                 tabIndex={-1}
-                href={i18Link("page/about-us", params.locale)}
+                href={i18Link("page/about-us", locale)}
               >
                 <button className="secondary">
                   {page.homePage.ctaSecondary}

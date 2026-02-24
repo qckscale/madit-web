@@ -15,10 +15,11 @@ const openSans = Open_Sans({ subsets: ["latin"] });
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string; locale: "en" | "sv" };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { locale } = await params;
   const generalSettings = await client.fetch<any>({
-    query: HOME_PAGE_SEO(params.locale),
+    query: HOME_PAGE_SEO(locale),
     config: {
       next: { revalidate: 60 },
     },
@@ -34,17 +35,18 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: "sv" | "en" };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const [settings, services] = await Promise.all([
     client.fetch<any>({
-      query: GENERAL_SETTINGS(params.locale),
+      query: GENERAL_SETTINGS(locale),
       config: {
         next: { revalidate: 60 },
       },
     }),
     client.fetch<any>({
-      query: SERVICE_GROQ(params.locale),
+      query: SERVICE_GROQ(locale),
       config: {
         next: { revalidate: 60 },
       },

@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 export default async function CustomerCase({
   params,
 }: {
-  params: { locale: "en" | "sv" };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const [work] = await Promise.all([
     client.fetch<any>({
-      query: ALL_WORK_GROQ(params.locale || "en"),
+      query: ALL_WORK_GROQ(locale || "en"),
       config: {
         next: { revalidate: 60 },
       },

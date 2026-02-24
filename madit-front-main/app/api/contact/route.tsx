@@ -1,9 +1,10 @@
-import { client } from "@mi/lib/email";
+import { getEmailClient } from "@mi/lib/email";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    const client = getEmailClient();
 
     const message = {
       senderAddress: "DoNotReply@mail.madit.se",

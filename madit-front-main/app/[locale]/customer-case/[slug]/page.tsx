@@ -5,10 +5,11 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string; locale: "en" | "sv" };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { slug, locale } = await params;
   const service = await client.fetch<any>({
-    query: WORK_SEO(params.slug, params.locale),
+    query: WORK_SEO(slug, locale),
     config: {
       next: { revalidate: 60 },
     },
@@ -24,11 +25,12 @@ export async function generateMetadata({
 export default async function CustomerCaseDetailPage({
   params,
 }: {
-  params: { slug: string; locale: "en" | "sv" };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { slug, locale } = await params;
   const [page] = await Promise.all([
     client.fetch<any>({
-      query: GET_ONE_CUSTOMER_CASE(params.slug, params.locale),
+      query: GET_ONE_CUSTOMER_CASE(slug, locale),
       config: {
         next: { revalidate: 60 },
       },

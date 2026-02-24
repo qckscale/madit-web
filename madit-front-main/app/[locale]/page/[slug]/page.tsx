@@ -5,10 +5,11 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string; locale: "en" | "sv" };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { slug, locale } = await params;
   const page = await client.fetch<any>({
-    query: PAGE_SEO(params.slug, params.locale || "en"),
+    query: PAGE_SEO(slug, locale || "en"),
     config: {
       next: { revalidate: 60 },
     },
@@ -23,11 +24,12 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: { slug: string; locale: "en" | "sv" };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { slug, locale } = await params;
   const [page] = await Promise.all([
     client.fetch<any>({
-      query: PAGE_GROQ(params.slug, params.locale || "en"),
+      query: PAGE_GROQ(slug, locale || "en"),
       config: {
         next: { revalidate: 60 },
       },

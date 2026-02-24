@@ -77,7 +77,7 @@ Update non-breaking packages:
 ---
 
 ## Stage 5 — Frontend: Next.js 14 → 15 + React 18.3
-**Risk: Medium** | **Status: Not started**
+**Risk: Medium** | **Status: Completed**
 
 - `next` 14.0.4 → 15.x (latest v15)
 - `react` / `react-dom` 18.2 → 18.3 (React 19 not yet — Next 15 supports 18.3+)
