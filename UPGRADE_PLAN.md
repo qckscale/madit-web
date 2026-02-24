@@ -29,7 +29,7 @@ Update non-breaking packages:
 ---
 
 ## Stage 2 — CMS: Sanity 3 → latest v3 (3.99)
-**Risk: Low** | **Status: Not started**
+**Risk: Low** | **Status: Completed**
 
 - `sanity` 3.15 → 3.99
 - `@sanity/vision` 3.15 → 3.99
