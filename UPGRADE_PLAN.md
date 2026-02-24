@@ -15,7 +15,7 @@ Both projects (frontend + CMS) are 2+ major versions behind on core dependencies
 ---
 
 ## Stage 1 — CMS: Safe minor/patch updates
-**Risk: Very Low** | **Status: Not started**
+**Risk: Very Low** | **Status: Completed**
 
 Update non-breaking packages:
 - `prettier` 3.0 → 3.8
