@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const resend = getEmailClient();
 
     const { error } = await resend.emails.send({
-      from: "MadIT <noreply@contact.madit.se>",
+      from: "MadIT <web@contact.madit.se>",
       to: ["daniel.moquist@madit.se"],
       subject: "Contact - MadIT.se",
       html: `

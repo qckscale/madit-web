@@ -1,4 +1,4 @@
-@import "../../app/variables";
+@use "../../app/variables" as *;
 
 .cookieConsent {
   box-sizing: border-box;
