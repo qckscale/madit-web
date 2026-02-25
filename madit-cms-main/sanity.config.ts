@@ -9,7 +9,7 @@ export default defineConfig({
   title: 'madit-web',
 
   projectId: 'rtmjambs',
-  dataset: 'production',
+  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
 
   plugins: [
     structureTool({

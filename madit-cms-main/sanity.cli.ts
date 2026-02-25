@@ -3,6 +3,6 @@ import {defineCliConfig} from 'sanity/cli'
 export default defineCliConfig({
   api: {
     projectId: 'rtmjambs',
-    dataset: 'production',
+    dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   },
 })
