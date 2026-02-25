@@ -38,8 +38,10 @@ madit-cms-main/dist/
 madit-cms-main/.sanity/
 madit-cms-main/logs/
 
-# Serena
-.serena/cache/
+# Editor/tool configs
+.claude/
+.cursor/
+.serena/
 
 # DS DS_Store
 .DS_Store
