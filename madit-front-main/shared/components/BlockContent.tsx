@@ -3,13 +3,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { PortableText } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 
 import "./BlockContent.scss";
 import { client } from "@mi/sanity";
 import CodeBlock from "./CodeBlock";
 
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder(client);
 export const urlFor = (source: any) => builder.image(source);
 const Image = ({ value }: { value: any }) => {
   const { width, height } = getImageDimensions(value);

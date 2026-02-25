@@ -1,11 +1,10 @@
-const { EmailClient } = require("@azure/communication-email");
+import { Resend } from "resend";
 
-let _client: InstanceType<typeof EmailClient> | null = null;
+let _client: Resend | null = null;
 
 export function getEmailClient() {
   if (!_client) {
-    const connectionString = process.env.EMAIL_ENDPOINT;
-    _client = new EmailClient(connectionString);
+    _client = new Resend(process.env.RESEND_API_KEY);
   }
   return _client;
 }

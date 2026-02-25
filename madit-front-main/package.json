@@ -9,7 +9,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@azure/communication-email": "^1.1.0",
     "@formatjs/intl-localematcher": "^0.4.2",
     "@portabletext/react": "^6.0.0",
     "@sanity/asset-utils": "^2.3.0",
@@ -22,6 +21,7 @@
     "next": "^16.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "resend": "^6.9.2",
     "sass": "^1.97.0"
   },
   "devDependencies": {
