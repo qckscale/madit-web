@@ -49,3 +49,5 @@ madit-cms-main/logs/
 
 *.tar.gz
 **/*.tar.gz
+
+.mcp.json
