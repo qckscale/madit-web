@@ -6,10 +6,10 @@ import {codeInput} from '@sanity/code-input'
 
 export default defineConfig({
   name: 'default',
-  title: 'madit-cms',
+  title: 'madit-web',
 
-  projectId: 'fy9oz1h7',
-  dataset: 'dev',
+  projectId: 'rtmjambs',
+  dataset: 'production',
 
   plugins: [
     structureTool({
