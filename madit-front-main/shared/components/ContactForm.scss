@@ -1,4 +1,4 @@
-@import "../../app/variables";
+@use "../../app/variables" as *;
 .section-wrapper {
   display: flex;
   justify-content: space-between;
