@@ -10,8 +10,8 @@ export async function generateMetadata({
 }) {
   const { slug, locale } = await params;
   const article = await client.fetch<any>(
-    BLOG_SEO(slug, locale || "en"),
-    {},
+    BLOG_SEO(locale || "en"),
+    { slug },
     { next: { revalidate: 60 } },
   );
   return {
@@ -27,7 +27,7 @@ export default async function NewsDetailPage({
 }) {
   const { slug, locale } = await params;
   const [page] = await Promise.all([
-    client.fetch<any>(GET_ONE_ARTICLES_GROQ(slug, locale || "en"), {}, { next: { revalidate: 60 } }),
+    client.fetch<any>(GET_ONE_ARTICLES_GROQ(locale || "en"), { slug }, { next: { revalidate: 60 } }),
   ]);
   if (!page) notFound();
   return (

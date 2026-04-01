@@ -10,8 +10,8 @@ export const FOOTER_GROQ = (locale = "en") => `
   "copyrightText": copyrightText.${locale}, 
 `;
 
-export const PAGE_GROQ = (url: string, locale = "en") => `
-*[_type == "page" && slug.current == "${url}"][0] {
+export const PAGE_GROQ = (locale = "en") => `
+*[_type == "page" && slug.current == $slug][0] {
   "title": title.${locale},
   "url": slug.current,
   "content": body.${locale},
@@ -72,28 +72,28 @@ export const HOME_PAGE_SEO = (locale = "en") => `
   ${LOCALIZED_SEO(locale)},
 }`;
 
-export const WORK_SEO = (url: string, locale = "en") => `
-*[_type == "work" && slug.current == "${url}"][0] {
+export const WORK_SEO = (locale = "en") => `
+*[_type == "work" && slug.current == $slug][0] {
   "seo": ${LOCALIZED_SEO(locale)},
   "title": title.${locale},
   "ingress": ingress.${locale}
 }`;
-export const SERVICE_SEO = (url: string, locale = "en") => `
-*[_type == "services" && slug.current == "${url}"][0] {
+export const SERVICE_SEO = (locale = "en") => `
+*[_type == "services" && slug.current == $slug][0] {
   "seo": ${LOCALIZED_SEO(locale)},
   "title": title.${locale},
   "ingress": ingress.${locale}
 }`;
 
-export const BLOG_SEO = (url: string, locale = "en") => `
-*[_type == "post" && slug.current == "${url}"][0] {
+export const BLOG_SEO = (locale = "en") => `
+*[_type == "post" && slug.current == $slug][0] {
   "seo": ${LOCALIZED_SEO(locale)},
-  "title": title.${locale}, 
+  "title": title.${locale},
   "ingress": ingress.${locale}
 }`;
 
-export const PAGE_SEO = (url: string, locale = "en") => `
-*[_type == "page" && slug.current == "${url}"][0] {
+export const PAGE_SEO = (locale = "en") => `
+*[_type == "page" && slug.current == $slug][0] {
   "seo": ${LOCALIZED_SEO(locale)},
   "title": title.${locale},
   "ingress": ingress.${locale}
@@ -108,8 +108,8 @@ export const SERVICE_GROQ = (locale = "en") => `
   "content": content.${locale},
 }`;
 
-export const GET_ONE_CUSTOMER_CASE = (url: string, locale = "en") => `
-*[_type == "work" && slug.current == "${url}"][0] {
+export const GET_ONE_CUSTOMER_CASE = (locale = "en") => `
+*[_type == "work" && slug.current == $slug][0] {
   "title": title.${locale},
   thumbnail,
   "ingress": ingress.${locale},
@@ -117,8 +117,8 @@ export const GET_ONE_CUSTOMER_CASE = (url: string, locale = "en") => `
   "content": content.${locale},
 }
 `;
-export const GET_ONE_SERVICE_GROQ = (url: string, locale = "en") => `
-*[_type == "services" && slug.current == "${url}"][0] {
+export const GET_ONE_SERVICE_GROQ = (locale = "en") => `
+*[_type == "services" && slug.current == $slug][0] {
   "title": title.${locale},
   thumbnail,
   "ingress": ingress.${locale},
@@ -126,8 +126,8 @@ export const GET_ONE_SERVICE_GROQ = (url: string, locale = "en") => `
   "content": content.${locale},
 }
 `;
-export const GET_ONE_ARTICLES_GROQ = (url: string, locale = "en") => `
-*[_type == "post" && slug.current == "${url}"][0] {
+export const GET_ONE_ARTICLES_GROQ = (locale = "en") => `
+*[_type == "post" && slug.current == $slug][0] {
   "title": title.${locale},
   "url": slug.current,
   "ingress": ingress.${locale},

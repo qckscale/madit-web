@@ -9,8 +9,8 @@ export async function generateMetadata({
 }) {
   const { slug, locale } = await params;
   const service = await client.fetch<any>(
-    SERVICE_SEO(slug, locale),
-    {},
+    SERVICE_SEO(locale),
+    { slug },
     { next: { revalidate: 60 } },
   );
   if (!service) notFound();
@@ -28,7 +28,7 @@ export default async function ServiceDetailPage({
 }) {
   const { slug, locale } = await params;
   const [page] = await Promise.all([
-    client.fetch<any>(GET_ONE_SERVICE_GROQ(slug, locale), {}, { next: { revalidate: 60 } }),
+    client.fetch<any>(GET_ONE_SERVICE_GROQ(locale), { slug }, { next: { revalidate: 60 } }),
   ]);
   if (!page) notFound();
 
