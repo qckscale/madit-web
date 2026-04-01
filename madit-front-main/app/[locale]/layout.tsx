@@ -43,7 +43,7 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={openSans.className}>
         <Header />
         {children}

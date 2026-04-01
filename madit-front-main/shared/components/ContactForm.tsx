@@ -24,10 +24,6 @@ export function ContactForm({ services }: ContactFormProps) {
     ev.preventDefault();
     setIsSending(true);
 
-    setTimeout(() => {
-      // pre-complete
-      setSuccessful(true);
-    }, 100);
     await contact(form).then(() => setSuccessful(true));
     setIsSending(false);
   };

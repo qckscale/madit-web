@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     });
   } catch (err) {
     console.error(err);
-    return new NextResponse("Email not sent!", {
+    return new NextResponse("Sanity query failed", {
       status: 400,
       headers: { "content-type": "application/json" },
     });

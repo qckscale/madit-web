@@ -33,7 +33,7 @@ async function getSitemap(locale = "sv"): Promise<MetadataRoute.Sitemap> {
 
 function addSlugPrefixes(slug: Slug[], prefix: string): any[] {
   return slug.map((item: Slug) => ({
-    ...slug,
+    ...item,
     slug: `${prefix}/${item.slug}`,
   }));
 }
