@@ -4,18 +4,35 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
+    const name = typeof body.name === "string" ? body.name.trim() : "";
+    const email = typeof body.email === "string" ? body.email.trim() : "";
+    const subject = typeof body.subject === "string" ? body.subject.trim() : "";
+    const message = typeof body.message === "string" ? body.message.trim() : "";
+
+    if (!name || !email || !subject || !message) {
+      return new NextResponse("Missing required fields", { status: 400 });
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return new NextResponse("Invalid email address", { status: 400 });
+    }
+
     const resend = getEmailClient();
 
     const { error } = await resend.emails.send({
       from: "MadIT <web@contact.madit.se>",
       to: ["daniel.moquist@madit.se"],
+      replyTo: email,
       subject: "Contact - MadIT.se",
-      html: `
-        <p>Services they're looking for: ${body.subject}</p>
-        <p>From: ${body.name}</p>
-        <p>Email: ${body.email}</p>
-        <p>Message: ${body.message}</p>
-      `,
+      text: [
+        `Services they're looking for: ${subject}`,
+        `From: ${name}`,
+        `Email: ${email}`,
+        ``,
+        `Message:`,
+        message,
+      ].join("\n"),
     });
 
     if (error) {
