@@ -1,14 +1,6 @@
 import { getEmailClient } from "@mi/lib/email";
 import { NextResponse } from "next/server";
 
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -31,13 +23,16 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: "MadIT <web@contact.madit.se>",
       to: ["daniel.moquist@madit.se"],
+      replyTo: email,
       subject: "Contact - MadIT.se",
-      html: `
-        <p>Services they're looking for: ${escapeHtml(subject)}</p>
-        <p>From: ${escapeHtml(name)}</p>
-        <p>Email: ${escapeHtml(email)}</p>
-        <p>Message: ${escapeHtml(message)}</p>
-      `,
+      text: [
+        `Services they're looking for: ${subject}`,
+        `From: ${name}`,
+        `Email: ${email}`,
+        ``,
+        `Message:`,
+        message,
+      ].join("\n"),
     });
 
     if (error) {
