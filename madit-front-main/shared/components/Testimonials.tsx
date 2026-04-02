@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Section from "./Section";
 import styles from "./Testimonials.module.scss";
 import BlockContent from "./BlockContent";
@@ -24,7 +25,7 @@ export default function Testimonials({
           {testimonials.map((testimonial: any) => (
             <div className="list-wrapper__item" key={testimonial.thumbnail}>
               <div className={styles.testimonialContent}>
-                <img src={`${testimonial.thumbnail}?auto=format&h=74&w=74`} />
+                <Image src={`${testimonial.thumbnail}?auto=format&h=74&w=74`} alt={testimonial.name} width={74} height={74} />
                 <div>
                   <h3>{testimonial.name}</h3>
                   <h4>{testimonial.title}</h4>

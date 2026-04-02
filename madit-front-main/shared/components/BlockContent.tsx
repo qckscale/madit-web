@@ -7,7 +7,8 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 
 import "./BlockContent.scss";
 import { client } from "@mi/sanity";
-import CodeBlock from "./CodeBlock";
+import dynamic from "next/dynamic";
+const CodeBlock = dynamic(() => import("./CodeBlock"), { ssr: false });
 
 const builder = createImageUrlBuilder(client);
 export const urlFor = (source: any) => builder.image(source);

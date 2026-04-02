@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { translate } from "../utils/lang/translate";
 import styles from "./Employees.module.scss";
@@ -18,10 +19,12 @@ export default function Employees({
         {consultants?.map((s) => (
           <div key={s.name} className={styles.employeeItem}>
             <div className={styles.employeeImageWrapper}>
-              <img
+              <Image
                 className={styles.employeesAvatar}
                 src={`${s.image}?auto=format&w=404`}
                 alt={s.name}
+                width={404}
+                height={404}
               />
             </div>
             <h3 className="heading-3">{s.name}</h3>
