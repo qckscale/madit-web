@@ -32,7 +32,7 @@ export default async function Home({
           alt=""
           fill
           priority
-          unoptimized
+          quality={100}
           sizes="100vw"
           placeholder="blur"
         />

@@ -54,7 +54,6 @@ export const HOME_PAGE_SETTINGS = (locale = "en") => `
   "contactImageUrl": contactImage.asset->url,
   homePage-> {
     ...,
-    "heroImage": heroImage.asset->url,
     "newsTitle": newsTitle.${locale},
     "title": title.${locale},
     "ctaPrimary": ctaPrimary.${locale},

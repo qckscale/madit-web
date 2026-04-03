@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },
     ],
-    formats: ["image/avif", "image/webp"],
+    formats: ["image/webp"],
   },
   experimental: {
     optimizePackageImports: ["@portabletext/react", "date-fns"],
