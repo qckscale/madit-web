@@ -1,29 +1,64 @@
-import hljs from "highlight.js/lib/core";
-import javascript from "highlight.js/lib/languages/javascript";
-import powershell from "highlight.js/lib/languages/powershell";
-import "highlight.js/styles/github-dark.css";
+import { useEffect, useState } from "react";
+import { createHighlighterCore } from "shiki/core";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
+import type { HighlighterCore } from "shiki/core";
 import styles from "./CodeBlock.module.scss";
 import { translate } from "../utils/lang/translate";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { ContentCopyIcon } from "../icons";
-hljs.registerLanguage("javascript", javascript);
-hljs.registerLanguage("powershell", powershell);
+
+let highlighterPromise: Promise<HighlighterCore> | null = null;
+
+function getHighlighter() {
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighterCore({
+      themes: [import("@shikijs/themes/github-dark")],
+      langs: [
+        import("@shikijs/langs/bash"),
+        import("@shikijs/langs/yaml"),
+        import("@shikijs/langs/typescript"),
+        import("@shikijs/langs/javascript"),
+        import("@shikijs/langs/json"),
+        import("@shikijs/langs/powershell"),
+        import("@shikijs/langs/terraform"),
+        import("@shikijs/langs/bicep"),
+      ],
+      engine: createJavaScriptRegexEngine(),
+    });
+  }
+  return highlighterPromise;
+}
 
 interface CodeBlockProps {
   code: string;
   className?: string;
   language?: string;
 }
+
 export default function CodeBlock({
   code,
   language = "powershell",
   className,
 }: CodeBlockProps) {
+  const [html, setHtml] = useState<string>("");
   const [hasCopied, setHasCopied] = useState(false);
   const pathname = usePathname();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
-  const highlightedCode = hljs.highlight(code, { language }).value;
+
+  useEffect(() => {
+    getHighlighter()
+      .then((highlighter) => {
+        const langs = highlighter.getLoadedLanguages();
+        const lang = langs.includes(language!) ? language! : "powershell";
+        setHtml(
+          highlighter.codeToHtml(code, { lang, theme: "github-dark" }),
+        );
+      })
+      .catch(() => {
+        setHtml(`<pre><code>${code}</code></pre>`);
+      });
+  }, [code, language]);
+
   const copy = () => {
     navigator.clipboard.writeText(code.toString());
     setHasCopied(true);
@@ -40,9 +75,17 @@ export default function CodeBlock({
             : translate("copy_code", locale)}
         </button>
       </div>
-      <pre className={styles.codeBlock} data-language={language}>
-        <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
-      </pre>
+      {html ? (
+        <div
+          className={styles.codeBlock}
+          data-language={language}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ) : (
+        <pre className={styles.codeBlock} data-language={language}>
+          <code>{code}</code>
+        </pre>
+      )}
     </>
   );
 }

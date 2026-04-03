@@ -22,7 +22,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "resend": "^6.9.2",
-    "sass": "^1.97.0"
+    "sass": "^1.97.0",
+    "shiki": "^4.0.2"
   },
   "browserslist": [
     "defaults and fully supports es6-module"

@@ -13,10 +13,22 @@
 }
 .codeBlock {
   margin-top: 0;
-  padding: 30px;
   border-radius: 0 0 10px 10px;
   display: block;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  background: #2c194b;
   overflow: auto;
+
+  pre {
+    margin: 0;
+    padding: 30px;
+    border-radius: 0 0 10px 10px;
+    background: #2c194b !important;
+    overflow: auto;
+  }
+
+  code {
+    font-family: "Fira Code", "Consolas", "Monaco", monospace;
+    font-size: 0.9em;
+    line-height: 1.6;
+  }
 }
