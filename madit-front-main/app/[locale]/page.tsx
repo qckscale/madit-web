@@ -27,7 +27,8 @@ export default async function Home({
       <section className="hero-section clouds">
         <Image
           className="hero-section__bg"
-          src={`${page.homePage.heroImage}?w=1920&auto=format&q=100`}
+          src={`${page.homePage.heroImage}?auto=format`}
+          quality={100}
           alt=""
           fill
           priority
