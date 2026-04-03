@@ -3,7 +3,7 @@ import "./page.scss";
 import { Services } from "@mi/shared/components/Services";
 import Link from "next/link";
 import Image from "next/image";
-import heroBg from "@mi/public/hero-bg.jpg";
+import heroBg from "@mi/public/hero-bg.webp";
 import { News } from "@mi/shared/components/News";
 import { ContactForm } from "@mi/shared/components/ContactForm";
 import { i18Link } from "@mi/shared/utils/lang/getLink";
@@ -32,7 +32,7 @@ export default async function Home({
           alt=""
           fill
           priority
-          quality={50}
+          unoptimized
           sizes="100vw"
         />
         <div className="hero-section__overlay" />

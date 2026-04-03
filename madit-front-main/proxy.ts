@@ -33,7 +33,7 @@ export function proxy(request: NextRequest) {
       "/logotype.svg",
       "/clouds.svg",
       "/content-bg.jpg",
-      "/hero-bg.jpg",
+      "/hero-bg.webp",
       "/socials/facebook.svg",
       "/socials/twitter.svg",
       "/socials/instagram.svg",
