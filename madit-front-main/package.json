@@ -14,6 +14,7 @@
     "@sanity/asset-utils": "^2.3.0",
     "@sanity/client": "^7.16.0",
     "@sanity/image-url": "^2.0.3",
+    "@taga3s/highlightjs-terraform": "^1.0.7",
     "date-fns": "^4.1.0",
     "highlight.js": "^11.11.0",
     "js-cookie": "^3.0.5",

@@ -1,6 +1,11 @@
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
 import powershell from "highlight.js/lib/languages/powershell";
+import bash from "highlight.js/lib/languages/bash";
+import yaml from "highlight.js/lib/languages/yaml";
+import typescript from "highlight.js/lib/languages/typescript";
+import { definer as terraform } from "@taga3s/highlightjs-terraform";
+import bicep from "./bicep";
 import "highlight.js/styles/github-dark.css";
 import styles from "./CodeBlock.module.scss";
 import { translate } from "../utils/lang/translate";
@@ -9,6 +14,17 @@ import { useState } from "react";
 import { ContentCopyIcon } from "../icons";
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("powershell", powershell);
+hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("sh", bash);
+hljs.registerLanguage("shell", bash);
+hljs.registerLanguage("yaml", yaml);
+hljs.registerLanguage("yml", yaml);
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("ts", typescript);
+hljs.registerLanguage("terraform", terraform);
+hljs.registerLanguage("tf", terraform);
+hljs.registerLanguage("hcl", terraform);
+hljs.registerLanguage("bicep", bicep);
 
 interface CodeBlockProps {
   code: string;
