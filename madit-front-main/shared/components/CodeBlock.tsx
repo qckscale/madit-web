@@ -13,6 +13,7 @@ import { translate } from "../utils/lang/translate";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ContentCopyIcon } from "../icons";
+
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("powershell", powershell);
 hljs.registerLanguage("bash", bash);
@@ -22,11 +23,21 @@ hljs.registerLanguage("yaml", yaml);
 hljs.registerLanguage("yml", yaml);
 hljs.registerLanguage("typescript", typescript);
 hljs.registerLanguage("ts", typescript);
-hljs.registerLanguage("terraform", terraform);
-hljs.registerLanguage("tf", terraform);
-hljs.registerLanguage("hcl", terraform);
-hljs.registerLanguage("bicep", bicep);
 hljs.registerLanguage("json", json);
+
+try {
+  hljs.registerLanguage("terraform", terraform);
+  hljs.registerLanguage("tf", terraform);
+  hljs.registerLanguage("hcl", terraform);
+} catch (e) {
+  console.warn("Failed to register terraform language:", e);
+}
+
+try {
+  hljs.registerLanguage("bicep", bicep);
+} catch (e) {
+  console.warn("Failed to register bicep language:", e);
+}
 
 interface CodeBlockProps {
   code: string;
@@ -41,8 +52,15 @@ export default function CodeBlock({
   const [hasCopied, setHasCopied] = useState(false);
   const pathname = usePathname();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
-  const lang = hljs.getLanguage(language) ? language : "powershell";
-  const highlightedCode = hljs.highlight(code, { language: lang }).value;
+
+  let highlightedCode: string;
+  try {
+    const lang = hljs.getLanguage(language) ? language : "powershell";
+    highlightedCode = hljs.highlight(code, { language: lang }).value;
+  } catch {
+    highlightedCode = code;
+  }
+
   const copy = () => {
     navigator.clipboard.writeText(code.toString());
     setHasCopied(true);
