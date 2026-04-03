@@ -28,8 +28,8 @@ export default async function Home({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="hero-section__bg"
-          src={`${page.homePage.heroImage}?w=1920&auto=format&q=100`}
-          srcSet={`${page.homePage.heroImage}?w=828&auto=format&q=100 828w, ${page.homePage.heroImage}?w=1200&auto=format&q=100 1200w, ${page.homePage.heroImage}?w=1920&auto=format&q=100 1920w, ${page.homePage.heroImage}?w=2560&auto=format&q=100 2560w, ${page.homePage.heroImage}?w=3840&auto=format&q=100 3840w`}
+          src={`${page.homePage.heroImage}?w=1920`}
+          srcSet={`${page.homePage.heroImage}?w=828 828w, ${page.homePage.heroImage}?w=1200 1200w, ${page.homePage.heroImage}?w=1920 1920w, ${page.homePage.heroImage}?w=2560 2560w, ${page.homePage.heroImage}?w=3840 3840w`}
           sizes="100vw"
           fetchPriority="high"
           alt=""
