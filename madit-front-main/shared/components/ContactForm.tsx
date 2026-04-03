@@ -5,6 +5,7 @@ import "./ContactForm.scss";
 import { contact } from "@mi/sanity";
 import { translate } from "../utils/lang/translate";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 interface ContactFormProps {
   services: any[];
 }
@@ -35,7 +36,7 @@ export function ContactForm({ services }: ContactFormProps) {
 
           <div className="section-wrapper">
             <div className="contact-form__image">
-              <img src="/contact-image.png" alt="" />
+              <Image src="/contact-image.png" alt="Contact MADIT" width={651} height={455} />
             </div>
             {successful ? (
               <p className="submit-success">

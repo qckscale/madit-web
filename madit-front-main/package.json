@@ -25,9 +25,7 @@
     "sass": "^1.97.0"
   },
   "browserslist": [
-    "last 2 versions",
-    "not dead",
-    "> 0.5%"
+    "defaults and fully supports es6-module"
   ],
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
