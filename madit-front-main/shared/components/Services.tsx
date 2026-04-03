@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import "./Services.scss";
 import { translate } from "../utils/lang/translate";
@@ -46,10 +47,12 @@ export function Services({
             href={i18Link(`service/${s.url}`, locale)}
           >
             {s.icon && (
-              <img
+              <Image
                 className="services__item__icon"
                 src={`${s.icon}?auto=format&w=64`}
                 alt={s.title}
+                width={64}
+                height={64}
               />
             )}
             <div>

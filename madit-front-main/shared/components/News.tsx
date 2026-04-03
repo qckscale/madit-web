@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import "./News.scss";
 import { usePathname } from "next/navigation";
@@ -42,7 +43,7 @@ export function News({ articles, title, isHome = false }: NewsProps) {
               className="news__container__item"
               href={i18Link(`news/${s.url}`, locale)}
             >
-              <img src={`${s.thumbnail}?auto=format&w=404`} alt={s.title} />
+              <Image src={`${s.thumbnail}?auto=format&w=404`} alt={s.title} width={404} height={270} />
               <div className="news__container__item-content">
                 <h3 className="heading-3">{s.title}</h3>
                 <p className="news__item__description">{s.ingress}</p>

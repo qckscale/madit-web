@@ -24,6 +24,11 @@
     "resend": "^6.9.2",
     "sass": "^1.97.0"
   },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "> 0.5%"
+  ],
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
     "@types/negotiator": "^0.6.4",
