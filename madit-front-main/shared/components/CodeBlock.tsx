@@ -4,6 +4,7 @@ import powershell from "highlight.js/lib/languages/powershell";
 import bash from "highlight.js/lib/languages/bash";
 import yaml from "highlight.js/lib/languages/yaml";
 import typescript from "highlight.js/lib/languages/typescript";
+import json from "highlight.js/lib/languages/json";
 import { definer as terraform } from "@taga3s/highlightjs-terraform";
 import bicep from "./bicep";
 import "highlight.js/styles/github-dark.css";
@@ -25,6 +26,7 @@ hljs.registerLanguage("terraform", terraform);
 hljs.registerLanguage("tf", terraform);
 hljs.registerLanguage("hcl", terraform);
 hljs.registerLanguage("bicep", bicep);
+hljs.registerLanguage("json", json);
 
 interface CodeBlockProps {
   code: string;
@@ -39,7 +41,8 @@ export default function CodeBlock({
   const [hasCopied, setHasCopied] = useState(false);
   const pathname = usePathname();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
-  const highlightedCode = hljs.highlight(code, { language }).value;
+  const lang = hljs.getLanguage(language) ? language : "powershell";
+  const highlightedCode = hljs.highlight(code, { language: lang }).value;
   const copy = () => {
     navigator.clipboard.writeText(code.toString());
     setHasCopied(true);
