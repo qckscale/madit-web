@@ -1,42 +1,32 @@
-import hljs from "highlight.js/lib/core";
-import javascript from "highlight.js/lib/languages/javascript";
-import powershell from "highlight.js/lib/languages/powershell";
-import bash from "highlight.js/lib/languages/bash";
-import yaml from "highlight.js/lib/languages/yaml";
-import typescript from "highlight.js/lib/languages/typescript";
-import json from "highlight.js/lib/languages/json";
-import { definer as terraform } from "@taga3s/highlightjs-terraform";
-import bicep from "./bicep";
-import "highlight.js/styles/github-dark.css";
+import { useEffect, useState } from "react";
+import { createHighlighterCore } from "shiki/core";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
+import type { HighlighterCore } from "shiki/core";
 import styles from "./CodeBlock.module.scss";
 import { translate } from "../utils/lang/translate";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { ContentCopyIcon } from "../icons";
 
-hljs.registerLanguage("javascript", javascript);
-hljs.registerLanguage("powershell", powershell);
-hljs.registerLanguage("bash", bash);
-hljs.registerLanguage("sh", bash);
-hljs.registerLanguage("shell", bash);
-hljs.registerLanguage("yaml", yaml);
-hljs.registerLanguage("yml", yaml);
-hljs.registerLanguage("typescript", typescript);
-hljs.registerLanguage("ts", typescript);
-hljs.registerLanguage("json", json);
+let highlighterPromise: Promise<HighlighterCore> | null = null;
 
-try {
-  hljs.registerLanguage("terraform", terraform);
-  hljs.registerLanguage("tf", terraform);
-  hljs.registerLanguage("hcl", terraform);
-} catch (e) {
-  console.warn("Failed to register terraform language:", e);
-}
-
-try {
-  hljs.registerLanguage("bicep", bicep);
-} catch (e) {
-  console.warn("Failed to register bicep language:", e);
+function getHighlighter() {
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighterCore({
+      themes: [import("@shikijs/themes/github-dark")],
+      langs: [
+        import("@shikijs/langs/bash"),
+        import("@shikijs/langs/yaml"),
+        import("@shikijs/langs/typescript"),
+        import("@shikijs/langs/javascript"),
+        import("@shikijs/langs/json"),
+        import("@shikijs/langs/powershell"),
+        import("@shikijs/langs/terraform"),
+        import("@shikijs/langs/bicep"),
+      ],
+      engine: createJavaScriptRegexEngine(),
+    });
+  }
+  return highlighterPromise;
 }
 
 interface CodeBlockProps {
@@ -44,22 +34,30 @@ interface CodeBlockProps {
   className?: string;
   language?: string;
 }
+
 export default function CodeBlock({
   code,
   language = "powershell",
   className,
 }: CodeBlockProps) {
+  const [html, setHtml] = useState<string>("");
   const [hasCopied, setHasCopied] = useState(false);
   const pathname = usePathname();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
 
-  let highlightedCode: string;
-  try {
-    const lang = hljs.getLanguage(language) ? language : "powershell";
-    highlightedCode = hljs.highlight(code, { language: lang }).value;
-  } catch {
-    highlightedCode = code;
-  }
+  useEffect(() => {
+    getHighlighter()
+      .then((highlighter) => {
+        const langs = highlighter.getLoadedLanguages();
+        const lang = langs.includes(language!) ? language! : "powershell";
+        setHtml(
+          highlighter.codeToHtml(code, { lang, theme: "github-dark" }),
+        );
+      })
+      .catch(() => {
+        setHtml(`<pre><code>${code}</code></pre>`);
+      });
+  }, [code, language]);
 
   const copy = () => {
     navigator.clipboard.writeText(code.toString());
@@ -77,9 +75,17 @@ export default function CodeBlock({
             : translate("copy_code", locale)}
         </button>
       </div>
-      <pre className={styles.codeBlock} data-language={language}>
-        <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
-      </pre>
+      {html ? (
+        <div
+          className={styles.codeBlock}
+          data-language={language}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ) : (
+        <pre className={styles.codeBlock} data-language={language}>
+          <code>{code}</code>
+        </pre>
+      )}
     </>
   );
 }

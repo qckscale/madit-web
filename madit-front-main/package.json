@@ -14,7 +14,6 @@
     "@sanity/asset-utils": "^2.3.0",
     "@sanity/client": "^7.16.0",
     "@sanity/image-url": "^2.0.3",
-    "@taga3s/highlightjs-terraform": "^1.0.7",
     "date-fns": "^4.1.0",
     "highlight.js": "^11.11.0",
     "js-cookie": "^3.0.5",
@@ -23,7 +22,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "resend": "^6.9.2",
-    "sass": "^1.97.0"
+    "sass": "^1.97.0",
+    "shiki": "^4.0.2"
   },
   "browserslist": [
     "defaults and fully supports es6-module"
