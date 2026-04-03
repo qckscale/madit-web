@@ -32,7 +32,7 @@ export default async function Home({
           alt=""
           fill
           priority
-          quality={90}
+          quality={75}
           sizes="100vw"
         />
         <div className="hero-section__overlay" />
