@@ -40,6 +40,7 @@ export function proxy(request: NextRequest) {
       "/socials/twitter.svg",
       "/socials/instagram.svg",
       "/socials/linkedin.svg",
+      "/google6f883b7a5b084ce7.html",
     ].includes(pathname)
   )
     return;

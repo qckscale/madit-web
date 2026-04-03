@@ -21,4 +21,12 @@ export const sv = {
   author: "Författare",
   our_work: "Vårt arbete",
   customer_cases: "Kundcase",
+  services_description:
+    "Utforska MADITs Azure-konsulttjänster — DevOps, säkerhet, AI, migrering och mer.",
+  contact_description:
+    "Kontakta MADIT Consulting AB för Azure-konsultation och molnlösningar.",
+  customer_cases_description:
+    "Se hur MADIT har hjälpt företag att transformera med Azure-lösningar.",
+  news_description:
+    "Senaste nyheter, artiklar och insikter från MADITs Azure-konsulter.",
 };

@@ -22,7 +22,10 @@ export const PAGE_GROQ = (locale = "en") => `
 export const LOCALIZED_SEO = (locale = "en") => `
   seo {
     "content": content.${locale},
-    "title": title.${locale}
+    "title": title.${locale},
+    "ogImageUrl": ogImage.asset->url,
+    canonicalUrl,
+    noIndex
   }
 `;
 
@@ -70,13 +73,15 @@ export const HOME_PAGE_SETTINGS = (locale = "en") => `
 export const HOME_PAGE_SEO = (locale = "en") => `
 *[_type == "generalSettings"][0] {
   ${LOCALIZED_SEO(locale)},
+  "homePageSeo": homePage->.${LOCALIZED_SEO(locale)}
 }`;
 
 export const WORK_SEO = (locale = "en") => `
 *[_type == "work" && slug.current == $slug][0] {
   "seo": ${LOCALIZED_SEO(locale)},
   "title": title.${locale},
-  "ingress": ingress.${locale}
+  "ingress": ingress.${locale},
+  "thumbnailUrl": thumbnail.asset->url
 }`;
 export const SERVICE_SEO = (locale = "en") => `
 *[_type == "services" && slug.current == $slug][0] {
@@ -89,14 +94,15 @@ export const BLOG_SEO = (locale = "en") => `
 *[_type == "post" && slug.current == $slug][0] {
   "seo": ${LOCALIZED_SEO(locale)},
   "title": title.${locale},
-  "ingress": ingress.${locale}
+  "ingress": ingress.${locale},
+  "thumbnailUrl": thumbnail.asset->url
 }`;
 
 export const PAGE_SEO = (locale = "en") => `
 *[_type == "page" && slug.current == $slug][0] {
   "seo": ${LOCALIZED_SEO(locale)},
   "title": title.${locale},
-  "ingress": ingress.${locale}
+  "mainImageUrl": mainImage.asset->url
 }`;
 
 export const SERVICE_GROQ = (locale = "en") => `

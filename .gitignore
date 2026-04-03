@@ -43,6 +43,39 @@ madit-cms-main/logs/
 .cursor/
 .serena/
 
+# AI agent/skill configs
+.adal/
+.agents/
+.augment/
+.bob/
+.codebuddy/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.factory/
+.goose/
+.iflow/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/
+skills/
+skills-lock.json
+
 # DS DS_Store
 .DS_Store
 **/.DS_Store
