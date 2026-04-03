@@ -8,8 +8,9 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 interface ContactFormProps {
   services: any[];
+  contactImageUrl?: string;
 }
-export function ContactForm({ services }: ContactFormProps) {
+export function ContactForm({ services, contactImageUrl }: ContactFormProps) {
   const pathname = usePathname();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
   const [isSending, setIsSending] = useState(false);
@@ -36,7 +37,7 @@ export function ContactForm({ services }: ContactFormProps) {
 
           <div className="section-wrapper">
             <div className="contact-form__image">
-              <Image src="/contact-image.png" alt="Contact MADIT" width={729} height={510} quality={100} sizes="(max-width: 768px) 100vw, 50vw" style={{ width: '100%', height: 'auto' }} />
+              <Image src={contactImageUrl || "/contact-image.png"} alt="Contact MADIT" width={1300} height={910} quality={100} sizes="(max-width: 768px) 100vw, 50vw" style={{ width: '100%', height: 'auto' }} />
             </div>
             {successful ? (
               <p className="submit-success">

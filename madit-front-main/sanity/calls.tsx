@@ -32,6 +32,7 @@ export const LOCALIZED_SEO = (locale = "en") => `
 export const GENERAL_SETTINGS = (locale = "en") => `
 *[_type == "generalSettings"][0] {
   ...,
+  "contactImageUrl": contactImage.asset->url,
   ${LOCALIZED_SEO(locale)},
   cookieSettings {
     "message": message.${locale},
@@ -50,6 +51,7 @@ export const GENERAL_SETTINGS = (locale = "en") => `
 
 export const HOME_PAGE_SETTINGS = (locale = "en") => `
 *[_type == "generalSettings"][0] {
+  "contactImageUrl": contactImage.asset->url,
   homePage-> {
     ...,
     "heroImage": heroImage.asset->url,
