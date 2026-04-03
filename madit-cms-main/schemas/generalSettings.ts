@@ -31,6 +31,15 @@ export default defineType({
     }),
 
     defineField({
+      title: 'Contact form image',
+      name: 'contactImage',
+      type: 'image',
+      description: 'Image shown next to the contact form. Upload high-res (1300px+ wide).',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       title: 'SEO settings',
       name: 'seo',
       type: 'seo',

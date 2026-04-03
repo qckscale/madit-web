@@ -59,7 +59,7 @@ export default async function Home({
         <Clouds />
         <News isHome title={page.homePage.newsTitle} articles={articles} />
         <Employees consultants={authors} />
-        <ContactForm services={page.homePage.services} />
+        <ContactForm services={page.homePage.services} contactImageUrl={page.contactImageUrl} />
         <Testimonials
           title={page.homePage.testimonialTitle}
           subtitle={page.homePage.testimonialSubtitle}

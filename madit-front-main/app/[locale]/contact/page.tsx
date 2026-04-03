@@ -1,4 +1,4 @@
-import { SERVICE_GROQ, client } from "@mi/sanity";
+import { SERVICE_GROQ, GENERAL_SETTINGS, client } from "@mi/sanity";
 import { ContactForm } from "@mi/shared/components/ContactForm";
 import Section from "@mi/shared/components/Section";
 import { buildMetadata } from "@mi/shared/utils/seo/metadata";
@@ -25,14 +25,15 @@ export default async function ContactPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const [services] = await Promise.all([
+  const [services, settings] = await Promise.all([
     client.fetch<any>(SERVICE_GROQ(locale || "en"), {}, { next: { revalidate: 60 } }),
+    client.fetch<any>(GENERAL_SETTINGS(locale || "en"), {}, { next: { revalidate: 60 } }),
   ]);
   if (!services) notFound();
 
   return (
     <div className="container-width container-width-page">
-      <ContactForm services={services} />
+      <ContactForm services={services} contactImageUrl={settings.contactImageUrl} />
     </div>
   );
 }
