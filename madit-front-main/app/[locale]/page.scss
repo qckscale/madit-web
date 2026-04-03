@@ -27,8 +27,8 @@
     height: 100%;
     z-index: 1;
     background:
-      rgba(71, 45, 112, 0.93),
-      rgba(0, 0, 0, 0.36);
+      linear-gradient(rgba(71, 45, 112, 0.93), rgba(71, 45, 112, 0.93)),
+      linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.36));
   }
 
   .hero-section__content {
