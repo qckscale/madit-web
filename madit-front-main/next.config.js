@@ -8,6 +8,7 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ["@portabletext/react", "date-fns"],
+    inlineCss: true,
   },
 };
 
