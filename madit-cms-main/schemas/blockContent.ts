@@ -65,6 +65,18 @@ export default defineType({
     }),
     defineArrayMember({
       type: 'code',
+      options: {
+        languageAlternatives: [
+          {title: 'Bash', value: 'bash'},
+          {title: 'Bicep', value: 'bicep'},
+          {title: 'JavaScript', value: 'javascript'},
+          {title: 'JSON', value: 'json'},
+          {title: 'PowerShell', value: 'powershell'},
+          {title: 'Terraform', value: 'terraform'},
+          {title: 'TypeScript', value: 'typescript'},
+          {title: 'YAML', value: 'yaml'},
+        ],
+      },
     }),
   ],
 })
