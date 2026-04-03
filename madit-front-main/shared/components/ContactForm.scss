@@ -12,6 +12,7 @@
     width: 50%;
     img {
       width: 100%;
+      border-radius: var(--border-radius);
     }
 
     @include mobile {
