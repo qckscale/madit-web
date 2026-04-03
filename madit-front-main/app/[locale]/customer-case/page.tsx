@@ -29,7 +29,7 @@ export default async function CustomerCase({
 
   return (
     <>
-      <Work work={work} isHome={false} />
+      <Work work={work} isHome={false} locale={locale as "en" | "sv"} />
     </>
   );
 }

@@ -37,7 +37,7 @@ export function ContactForm({ services, contactImageUrl }: ContactFormProps) {
 
           <div className="section-wrapper">
             <div className="contact-form__image">
-              <Image src={contactImageUrl || "/contact-image.png"} alt="Contact MADIT" width={1300} height={910} quality={100} sizes="(max-width: 768px) 100vw, 50vw" style={{ width: '100%', height: 'auto' }} />
+              {contactImageUrl && <Image src={contactImageUrl} alt="Contact MADIT" width={1300} height={910} quality={100} sizes="(max-width: 768px) 100vw, 50vw" style={{ width: '100%', height: 'auto' }} />}
             </div>
             {successful ? (
               <p className="submit-success">

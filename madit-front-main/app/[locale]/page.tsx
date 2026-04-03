@@ -2,6 +2,8 @@ import { HOMEPAGE_GROQ, client } from "@mi/sanity";
 import "./page.scss";
 import { Services } from "@mi/shared/components/Services";
 import Link from "next/link";
+import Image from "next/image";
+import heroBg from "@mi/public/hero-bg.jpg";
 import { News } from "@mi/shared/components/News";
 import { ContactForm } from "@mi/shared/components/ContactForm";
 import { i18Link } from "@mi/shared/utils/lang/getLink";
@@ -23,14 +25,17 @@ export default async function Home({
 
   return (
     <main className="homepage-container">
-      <section
-        className="hero-section clouds"
-        style={{
-          background: `url(${page.homePage.heroImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-        }}
-      >
+      <section className="hero-section clouds">
+        <Image
+          className="hero-section__bg"
+          src={heroBg}
+          alt=""
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+          placeholder="blur"
+        />
         <div className="container-width">
           <div className="hero-section__content">
             <h1
@@ -54,11 +59,11 @@ export default async function Home({
         </div>
       </section>
       <div className="inner-home">
-        <Services isHome services={page.homePage.services} />
-        <Work isHome work={work} />
+        <Services isHome services={page.homePage.services} locale={locale as "en" | "sv"} />
+        <Work isHome work={work} locale={locale as "en" | "sv"} />
         <Clouds />
-        <News isHome title={page.homePage.newsTitle} articles={articles} />
-        <Employees consultants={authors} />
+        <News isHome title={page.homePage.newsTitle} articles={articles} locale={locale as "en" | "sv"} />
+        <Employees consultants={authors} locale={locale as "en" | "sv"} />
         <ContactForm services={page.homePage.services} contactImageUrl={page.contactImageUrl} />
         <Testimonials
           title={page.homePage.testimonialTitle}

@@ -29,7 +29,7 @@ export default async function Home({
 
   return (
     <>
-      <Services topMargin={false} services={services} />
+      <Services topMargin={false} services={services} locale={locale as "en" | "sv"} />
     </>
   );
 }
