@@ -32,9 +32,8 @@ export default async function Home({
           alt=""
           fill
           priority
-          quality={100}
+          quality={90}
           sizes="100vw"
-          placeholder="blur"
         />
         <div className="hero-section__overlay" />
         <div className="container-width">
