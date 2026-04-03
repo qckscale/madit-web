@@ -2,7 +2,8 @@ import { HOMEPAGE_GROQ, client } from "@mi/sanity";
 import "./page.scss";
 import { Services } from "@mi/shared/components/Services";
 import Link from "next/link";
-
+import Image from "next/image";
+import heroBg from "@mi/public/header-bg.jpg";
 import { News } from "@mi/shared/components/News";
 import { ContactForm } from "@mi/shared/components/ContactForm";
 import { i18Link } from "@mi/shared/utils/lang/getLink";
@@ -25,14 +26,15 @@ export default async function Home({
   return (
     <main className="homepage-container">
       <section className="hero-section clouds">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           className="hero-section__bg"
-          src={`${page.homePage.heroImage}?w=1920&auto=format`}
-          srcSet={`${page.homePage.heroImage}?w=828&auto=format 828w, ${page.homePage.heroImage}?w=1200&auto=format 1200w, ${page.homePage.heroImage}?w=1920&auto=format 1920w, ${page.homePage.heroImage}?w=2560&auto=format 2560w, ${page.homePage.heroImage}?w=3840&auto=format 3840w`}
-          sizes="100vw"
-          fetchPriority="high"
+          src={heroBg}
           alt=""
+          fill
+          priority
+          quality={100}
+          sizes="100vw"
+          placeholder="blur"
         />
         <div className="container-width">
           <div className="hero-section__content">
