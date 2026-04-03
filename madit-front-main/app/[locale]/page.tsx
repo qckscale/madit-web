@@ -36,6 +36,7 @@ export default async function Home({
           sizes="100vw"
           placeholder="blur"
         />
+        <div className="hero-section__overlay" />
         <div className="container-width">
           <div className="hero-section__content">
             <h1
