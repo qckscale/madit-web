@@ -156,6 +156,7 @@ button {
     position: absolute;
     height: 400px;
     margin-top: -200px;
+    z-index: 3;
   }
   &.inverted {
     margin-top: 200px;
