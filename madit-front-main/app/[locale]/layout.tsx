@@ -9,6 +9,8 @@ import {
   client,
 } from "@mi/sanity";
 import { ExternalScripts } from "@mi/shared/components/ExternalScripts";
+import { buildMetadata } from "@mi/shared/utils/seo/metadata";
+import { organizationJsonLd } from "@mi/shared/utils/seo/jsonld";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -18,14 +20,19 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { locale } = await params;
-  const generalSettings = await client.fetch<any>(
+  const data = await client.fetch<any>(
     HOME_PAGE_SEO(locale),
     {},
     { next: { revalidate: 60 } },
   );
+  const seo = data.homePageSeo?.seo || data.seo;
   return {
-    title: generalSettings.seo.title,
-    description: generalSettings.seo.content,
+    metadataBase: new URL(process.env.BASE_URL || "https://madit.se"),
+    ...buildMetadata({
+      seo,
+      locale,
+      path: "",
+    }),
   };
 }
 
@@ -42,9 +49,19 @@ export default async function RootLayout({
     client.fetch<any>(SERVICE_GROQ(locale), {}, { next: { revalidate: 60 } }),
   ]);
 
+  const orgJsonLd = organizationJsonLd({
+    phone: settings.footer?.phone,
+    email: settings.footer?.email,
+    address: settings.footer?.address,
+  });
+
   return (
     <html lang={locale}>
       <body className={openSans.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
         <Header />
         {children}
         <Footer footer={settings.footer} services={services} />

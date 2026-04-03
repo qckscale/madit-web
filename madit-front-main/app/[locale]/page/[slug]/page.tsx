@@ -1,5 +1,6 @@
 import { PAGE_GROQ, PAGE_SEO, client } from "@mi/sanity";
 import BlockContent from "@mi/shared/components/BlockContent";
+import { buildMetadata } from "@mi/shared/utils/seo/metadata";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -14,10 +15,13 @@ export async function generateMetadata({
     { next: { revalidate: 60 } },
   );
   if (!page) return {};
-  return {
-    title: page.seo?.title || page.title,
-    description: page.seo?.content || page.ingress,
-  };
+  return buildMetadata({
+    seo: page.seo,
+    fallbackTitle: page.title,
+    fallbackImageUrl: page.mainImageUrl,
+    locale: locale || "en",
+    path: `/page/${slug}`,
+  });
 }
 
 export default async function Page({

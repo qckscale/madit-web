@@ -1,5 +1,6 @@
 import { GET_ONE_SERVICE_GROQ, SERVICE_SEO, client } from "@mi/sanity";
 import BlockContent from "@mi/shared/components/BlockContent";
+import { buildMetadata } from "@mi/shared/utils/seo/metadata";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -14,11 +15,13 @@ export async function generateMetadata({
     { next: { revalidate: 60 } },
   );
   if (!service) notFound();
-
-  return {
-    title: service.seo?.title || service.title,
-    description: service.seo?.content || service.ingress,
-  };
+  return buildMetadata({
+    seo: service.seo,
+    fallbackTitle: service.title,
+    fallbackDescription: service.ingress,
+    locale,
+    path: `/service/${slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({

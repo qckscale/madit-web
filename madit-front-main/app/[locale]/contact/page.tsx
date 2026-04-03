@@ -1,12 +1,23 @@
 import { SERVICE_GROQ, client } from "@mi/sanity";
 import { ContactForm } from "@mi/shared/components/ContactForm";
 import Section from "@mi/shared/components/Section";
-import { Metadata } from "next";
+import { buildMetadata } from "@mi/shared/utils/seo/metadata";
+import { translate } from "@mi/shared/utils/lang/translate";
 import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Contact | MadIT",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return buildMetadata({
+    fallbackTitle: translate("contact", locale as "sv" | "en"),
+    fallbackDescription: translate("contact_description", locale as "sv" | "en"),
+    locale,
+    path: "/contact",
+  });
+}
 
 export default async function ContactPage({
   params,
