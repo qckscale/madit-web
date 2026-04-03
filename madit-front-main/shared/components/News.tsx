@@ -1,18 +1,15 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import "./News.scss";
-import { usePathname } from "next/navigation";
 import { translate } from "../utils/lang/translate";
 import { i18Link } from "../utils/lang/getLink";
 interface NewsProps {
   articles: any[];
   title?: string;
   isHome?: boolean;
+  locale: "en" | "sv";
 }
-export function News({ articles, title, isHome = false }: NewsProps) {
-  const pathname = usePathname();
-  const locale = pathname.startsWith("/en") ? "en" : "sv";
+export function News({ articles, title, isHome = false, locale }: NewsProps) {
   title = title || translate("news", locale);
   return (
     <>

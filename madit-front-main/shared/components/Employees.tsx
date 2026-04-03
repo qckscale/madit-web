@@ -1,15 +1,13 @@
-"use client";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { translate } from "../utils/lang/translate";
 import styles from "./Employees.module.scss";
 export default function Employees({
   consultants,
+  locale,
 }: {
   consultants: { image: string; name: string; title: string }[];
+  locale: "en" | "sv";
 }) {
-  const pathname = usePathname();
-  const locale = pathname.startsWith("/en") ? "en" : "sv";
   return (
     <section className={`${styles.employees} news container-width`}>
       <div className="container-width">

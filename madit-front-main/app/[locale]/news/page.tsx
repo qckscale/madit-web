@@ -29,7 +29,7 @@ export default async function NewsPage({
 
   return (
     <>
-      <News articles={articles} />
+      <News articles={articles} locale={locale as "en" | "sv"} />
     </>
   );
 }

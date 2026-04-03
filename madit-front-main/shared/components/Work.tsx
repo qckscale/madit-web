@@ -1,14 +1,10 @@
-"use client";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { translate } from "../utils/lang/translate";
 import Link from "next/link";
 import { i18Link } from "../utils/lang/getLink";
 import styles from "./Work.module.scss";
 
-export default function Work({ isHome, work }: { isHome: boolean; work: any }) {
-  const pathname = usePathname();
-  const locale = pathname.startsWith("/en") ? "en" : "sv";
+export default function Work({ isHome, work, locale }: { isHome: boolean; work: any; locale: "en" | "sv" }) {
 
   return (
     <section className={`container-width ${styles.work}`}>

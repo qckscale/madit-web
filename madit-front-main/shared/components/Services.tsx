@@ -1,23 +1,21 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import "./Services.scss";
 import { translate } from "../utils/lang/translate";
-import { usePathname } from "next/navigation";
 import { i18Link } from "../utils/lang/getLink";
 interface ServicesProps {
   services: any[];
   topMargin?: boolean;
   isHome?: boolean;
+  locale: "en" | "sv";
 }
 
 export function Services({
   services,
   topMargin = true,
   isHome = false,
+  locale,
 }: ServicesProps) {
-  const pathname = usePathname();
-  const locale = pathname.startsWith("/en") ? "en" : "sv";
   return (
     <section
       className={`services ${

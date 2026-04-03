@@ -25,7 +25,10 @@
     "sass": "^1.97.0"
   },
   "browserslist": [
-    "defaults and fully supports es6-module"
+    "Chrome >= 105",
+    "Firefox >= 104",
+    "Safari >= 16",
+    "Edge >= 105"
   ],
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
