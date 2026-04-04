@@ -15,9 +15,9 @@ interface FooterProps {
       link: string;
       isCustomLink?: boolean;
     }[];
-    services: {
+    footerServices?: {
       title: string;
-      link: string;
+      url: string;
     }[];
     name: string;
     address: string;
@@ -49,14 +49,15 @@ export function Footer({ footer, services }: FooterProps) {
     [locale]
   );
 
-  const halfIndex = useMemo(() => Math.ceil(services.length / 2), [services]);
+  const footerServicesList = footer.footerServices?.length ? footer.footerServices : services;
+  const halfIndex = useMemo(() => Math.ceil(footerServicesList.length / 2), [footerServicesList]);
   const firstHalf = useMemo(
-    () => services.slice(0, halfIndex),
-    [services, halfIndex]
+    () => footerServicesList.slice(0, halfIndex),
+    [footerServicesList, halfIndex]
   );
   const secondHalf = useMemo(
-    () => services.slice(halfIndex),
-    [services, halfIndex]
+    () => footerServicesList.slice(halfIndex),
+    [footerServicesList, halfIndex]
   );
 
   return (

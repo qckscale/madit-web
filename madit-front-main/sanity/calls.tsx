@@ -7,7 +7,11 @@ export const FOOTER_GROQ = (locale = "en") => `
     "title": title.${locale},
     "link": slug.current
   },
-  "copyrightText": copyrightText.${locale}, 
+  footerServices[]-> {
+    "title": title.${locale},
+    "url": slug.current,
+  },
+  "copyrightText": copyrightText.${locale},
 `;
 
 export const PAGE_GROQ = (locale = "en") => `

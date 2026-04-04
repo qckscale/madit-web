@@ -40,6 +40,14 @@ export default defineType({
       of: [{type: 'reference', to: [{type: 'page'}, {type: 'services'}]}],
     }),
     defineField({
+      name: 'footerServices',
+      title: 'Footer Services',
+      description: 'Pick which services to show in the footer (max 8)',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'services'}]}],
+      validation: (Rule) => Rule.max(8),
+    }),
+    defineField({
       name: 'copyrightText',
       title: 'Copyright text',
       type: 'localeString',
