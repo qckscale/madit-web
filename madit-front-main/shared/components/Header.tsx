@@ -125,7 +125,7 @@ export function Header({ services = [] }: HeaderProps) {
             )}
             {mobileServicesOpen && (
               <div className="header__mobile-submenu">
-                <span className="header__mobile-submenu__heading">{translate("consulting", locale)}</span>
+                <Link className="header__mobile-submenu__heading" href={i18Link("services", locale)}>{translate("consulting", locale)}</Link>
                 {consulting.map((s) => (
                   <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>{s.title}</Link>
                 ))}
