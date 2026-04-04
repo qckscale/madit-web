@@ -1,6 +1,6 @@
 export const en = {
   home: "Home",
-  services: "Services",
+  services: "What we do",
   about: "About",
   news: "News/Blog",
   contact: "Contact",
@@ -29,15 +29,15 @@ export const en = {
     "See how MADIT has helped businesses transform with Azure solutions.",
   news_description:
     "Latest news, articles, and insights from MADIT's Azure consultants.",
-  consulting: "Consulting",
+  consulting: "Services",
   training: "Training",
-  products: "Products",
+  products: "Deliveries",
   consulting_description:
-    "Hire Azure consultants by the hour to strengthen your team.",
+    "Ongoing services for your Azure environment. Consultants by the hour or fully managed infrastructure.",
   training_description:
     "Training days and workshops that build competence in your organization.",
   products_description:
-    "Ready-made deliverables with clear scope and fixed engagement.",
+    "Ready-made deliveries with clear scope. We deploy, hand over, and you take it from there.",
   duration: "Duration",
   target_audience: "Target audience",
   prerequisites: "Prerequisites",

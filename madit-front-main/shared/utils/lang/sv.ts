@@ -1,6 +1,6 @@
 export const sv = {
   home: "Hem",
-  services: "Tjänster",
+  services: "Vad vi gör",
   about: "Om oss",
   news: "Nyheter/Blogg",
   contact: "Kontakt",
@@ -29,15 +29,15 @@ export const sv = {
     "Se hur MADIT har hjälpt företag att transformera med Azure-lösningar.",
   news_description:
     "Senaste nyheter, artiklar och insikter från MADITs Azure-konsulter.",
-  consulting: "Konsulttjänst",
+  consulting: "Tjänster",
   training: "Utbildning",
-  products: "Produkter",
+  products: "Leveranser",
   consulting_description:
-    "Hyr in Azure-konsulter per timme för att stärka ert team.",
+    "Löpande tjänster för er Azure-miljö. Konsulter per timme eller fullt hanterad infrastruktur.",
   training_description:
     "Utbildningsdagar och workshops som bygger kompetens i er organisation.",
   products_description:
-    "Färdiga leveranser med tydligt scope och fast omfattning.",
+    "Färdiga leveranser med tydligt scope. Vi deployar, lämnar över och ni kör vidare.",
   duration: "Längd",
   target_audience: "Målgrupp",
   prerequisites: "Förkunskaper",
