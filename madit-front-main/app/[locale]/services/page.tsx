@@ -17,19 +17,49 @@ export async function generateMetadata({
   });
 }
 
-export default async function Home({
+export default async function ServicesPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const [services] = await Promise.all([
-    client.fetch<any>(SERVICE_GROQ(locale || "en"), {}, { next: { revalidate: 60 } }),
-  ]);
+  const loc = (locale || "en") as "sv" | "en";
+  const services = await client.fetch<any[]>(
+    SERVICE_GROQ(loc),
+    {},
+    { next: { revalidate: 60 } },
+  );
+
+  const consulting = services.find((s) => s.category === "consulting");
+  const trainingCount = services.filter((s) => s.category === "training").length;
+  const productsCount = services.filter((s) => s.category === "products").length;
+
+  const categoryCards = [
+    {
+      title: consulting?.title || translate("consulting", loc),
+      ingress: consulting?.ingress || translate("consulting_description", loc),
+      icon: consulting?.icon || null,
+      url: consulting ? `service/${consulting.url}` : "services",
+    },
+    {
+      title: translate("training", loc),
+      ingress: translate("training_description", loc),
+      icon: null,
+      url: "services/training",
+    },
+    {
+      title: translate("products", loc),
+      ingress: translate("products_description", loc),
+      icon: null,
+      url: "services/products",
+    },
+  ];
 
   return (
-    <>
-      <Services topMargin={false} services={services} locale={locale as "en" | "sv"} />
-    </>
+    <Services
+      services={categoryCards}
+      topMargin={false}
+      locale={loc}
+    />
   );
 }

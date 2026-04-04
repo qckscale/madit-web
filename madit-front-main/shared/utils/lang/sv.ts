@@ -29,4 +29,23 @@ export const sv = {
     "Se hur MADIT har hjälpt företag att transformera med Azure-lösningar.",
   news_description:
     "Senaste nyheter, artiklar och insikter från MADITs Azure-konsulter.",
+  consulting: "Konsulttjänst",
+  training: "Utbildning",
+  products: "Produkter",
+  consulting_description:
+    "Hyr in Azure-konsulter per timme för att stärka ert team.",
+  training_description:
+    "Utbildningsdagar och workshops som bygger kompetens i er organisation.",
+  products_description:
+    "Färdiga leveranser med tydligt scope och fast omfattning.",
+  duration: "Längd",
+  target_audience: "Målgrupp",
+  prerequisites: "Förkunskaper",
+  deliverables: "Leveranser",
+  estimated_timeline: "Uppskattad tid",
+  starting_price: "Pris från",
+  "2h": "2 timmar",
+  full_day: "Heldag",
+  half_day: "Halvdag",
+  multi_day: "Flerdagar",
 };

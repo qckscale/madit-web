@@ -22,6 +22,21 @@ export default defineType({
       type: 'localeString',
     }),
     defineField({
+      name: 'category',
+      group: 'content',
+      title: 'Category',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          {title: 'Konsulttjänst', value: 'consulting'},
+          {title: 'Utbildning', value: 'training'},
+          {title: 'Produkter', value: 'products'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       group: 'content',
@@ -65,6 +80,63 @@ export default defineType({
       title: 'Content',
       type: 'localeBlockContent',
     }),
+    // Training-specific fields
+    defineField({
+      name: 'duration',
+      group: 'content',
+      title: 'Duration',
+      type: 'string',
+      options: {
+        list: [
+          {title: '2 timmar', value: '2h'},
+          {title: 'Halvdag', value: 'half_day'},
+          {title: 'Heldag', value: 'full_day'},
+          {title: 'Flerdagar', value: 'multi_day'},
+        ],
+      },
+      hidden: ({document}) => document?.category !== 'training',
+    }),
+    defineField({
+      name: 'targetAudience',
+      group: 'content',
+      title: 'Target Audience',
+      description: 'Who is this training for?',
+      type: 'localeText',
+      hidden: ({document}) => document?.category !== 'training',
+    }),
+    defineField({
+      name: 'prerequisites',
+      group: 'content',
+      title: 'Prerequisites',
+      description: 'Required knowledge before attending',
+      type: 'localeText',
+      hidden: ({document}) => document?.category !== 'training',
+    }),
+    // Product-specific fields
+    defineField({
+      name: 'deliverables',
+      group: 'content',
+      title: 'Deliverables',
+      description: 'What the customer receives',
+      type: 'localeBlockContent',
+      hidden: ({document}) => document?.category !== 'products',
+    }),
+    defineField({
+      name: 'estimatedTimeline',
+      group: 'content',
+      title: 'Estimated Timeline',
+      description: 'E.g. "2-4 veckor"',
+      type: 'localeString',
+      hidden: ({document}) => document?.category !== 'products',
+    }),
+    defineField({
+      name: 'startingPrice',
+      group: 'content',
+      title: 'Starting Price',
+      description: 'E.g. "Från 45 000 SEK"',
+      type: 'localeString',
+      hidden: ({document}) => document?.category !== 'products',
+    }),
     defineField({
       name: 'seo',
       type: 'seo',
@@ -78,12 +150,19 @@ export default defineType({
   preview: {
     select: {
       title: 'title.sv',
-      author: 'author.name',
-      media: 'mainImage',
+      category: 'category',
+      media: 'icon',
     },
     prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+      const categoryLabels: Record<string, string> = {
+        consulting: 'Konsulttjänst',
+        training: 'Utbildning',
+        products: 'Produkter',
+      }
+      return {
+        ...selection,
+        subtitle: categoryLabels[selection.category] || 'Ingen kategori',
+      }
     },
   },
 })

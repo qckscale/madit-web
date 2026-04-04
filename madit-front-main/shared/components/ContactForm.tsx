@@ -85,11 +85,19 @@ export function ContactForm({ services, contactImageUrl }: ContactFormProps) {
                     <option value={translate("other", locale)}>
                       {translate("other", locale)}
                     </option>
-                    {services.map((service) => (
-                      <option key={service.title} value={service.title}>
-                        {service.title}
-                      </option>
-                    ))}
+                    {(["consulting", "training", "products"] as const).map((cat) => {
+                      const catServices = services.filter((s) => s.category === cat);
+                      if (!catServices.length) return null;
+                      return (
+                        <optgroup key={cat} label={translate(cat, locale)}>
+                          {catServices.map((service) => (
+                            <option key={service.title} value={service.title}>
+                              {service.title}
+                            </option>
+                          ))}
+                        </optgroup>
+                      );
+                    })}
                   </select>
                 </div>
                 <div className="contact-form__form__input">

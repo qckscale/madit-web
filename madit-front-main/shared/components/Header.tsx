@@ -9,13 +9,23 @@ import { usePathname, useRouter } from "next/navigation";
 import { translate } from "../utils/lang/translate";
 import { i18Link } from "../utils/lang/getLink";
 
-export function Header() {
+interface HeaderProps {
+  services?: any[];
+}
+
+export function Header({ services = [] }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const pathname = usePathname();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
   const toggleOpen = () => setIsOpen(!isOpen);
   const [showMenuOnScroll, setShowMenuOnScroll] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+  const consulting = services.filter((s) => s.category === "consulting");
+  const training = services.filter((s) => s.category === "training");
+  const products = services.filter((s) => s.category === "products");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +43,8 @@ export function Header() {
 
   useEffect(() => {
     setIsOpen(false); // eslint-disable-line react-hooks/set-state-in-effect -- intentional: close menu on navigation
+    setMegaMenuOpen(false);
+    setMobileServicesOpen(false);
   }, [pathname]);
   return (
     <nav
@@ -57,9 +69,78 @@ export function Header() {
             isOpen ? "is-open" : ""
           }`}
         >
-          <Link href={i18Link("services", locale)}>
-            {translate("services", locale)}
-          </Link>
+          <div
+            className="header__services-trigger"
+            onMouseEnter={() => setMegaMenuOpen(true)}
+            onMouseLeave={() => setMegaMenuOpen(false)}
+          >
+            <Link href={i18Link("services", locale)} className="hide-on-mob">
+              {translate("services", locale)}
+            </Link>
+            <button
+              className="header__services-mobile-toggle show-on-mob"
+              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+            >
+              {translate("services", locale)}
+              <span className={`header__chevron ${mobileServicesOpen ? "is-open" : ""}`}>&#9660;</span>
+            </button>
+            {megaMenuOpen && services.length > 0 && (
+              <div className="header__megamenu">
+                <div className="header__megamenu__inner container-width">
+                  <div className="header__megamenu__column">
+                    <span className="header__megamenu__heading">
+                      {translate("consulting", locale)}
+                    </span>
+                    {consulting.map((s) => (
+                      <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="header__megamenu__column">
+                    <Link className="header__megamenu__heading" href={i18Link("services/training", locale)}>
+                      {translate("training", locale)}
+                    </Link>
+                    {training.map((s) => (
+                      <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="header__megamenu__column">
+                    <Link className="header__megamenu__heading" href={i18Link("services/products", locale)}>
+                      {translate("products", locale)}
+                    </Link>
+                    {products.map((s) => (
+                      <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+            {mobileServicesOpen && (
+              <div className="header__mobile-submenu">
+                <span className="header__mobile-submenu__heading">{translate("consulting", locale)}</span>
+                {consulting.map((s) => (
+                  <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>{s.title}</Link>
+                ))}
+                <Link className="header__mobile-submenu__heading" href={i18Link("services/training", locale)}>
+                  {translate("training", locale)}
+                </Link>
+                {training.map((s) => (
+                  <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>{s.title}</Link>
+                ))}
+                <Link className="header__mobile-submenu__heading" href={i18Link("services/products", locale)}>
+                  {translate("products", locale)}
+                </Link>
+                {products.map((s) => (
+                  <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>{s.title}</Link>
+                ))}
+              </div>
+            )}
+          </div>
           <Link href={i18Link("customer-case", locale)}>
             {translate("customer_cases", locale)}
           </Link>

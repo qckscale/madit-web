@@ -29,4 +29,23 @@ export const en = {
     "See how MADIT has helped businesses transform with Azure solutions.",
   news_description:
     "Latest news, articles, and insights from MADIT's Azure consultants.",
+  consulting: "Consulting",
+  training: "Training",
+  products: "Products",
+  consulting_description:
+    "Hire Azure consultants by the hour to strengthen your team.",
+  training_description:
+    "Training days and workshops that build competence in your organization.",
+  products_description:
+    "Ready-made deliverables with clear scope and fixed engagement.",
+  duration: "Duration",
+  target_audience: "Target audience",
+  prerequisites: "Prerequisites",
+  deliverables: "Deliverables",
+  estimated_timeline: "Estimated timeline",
+  starting_price: "Starting price",
+  "2h": "2 hours",
+  full_day: "Full day",
+  half_day: "Half day",
+  multi_day: "Multiple days",
 };

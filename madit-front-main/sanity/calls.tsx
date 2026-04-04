@@ -46,6 +46,7 @@ export const GENERAL_SETTINGS = (locale = "en") => `
   services[]-> {
     "title": title.${locale},
     "ingress": ingress.${locale},
+    category,
   }
 }`;
 
@@ -66,7 +67,8 @@ export const HOME_PAGE_SETTINGS = (locale = "en") => `
       "icon": icon.asset->url,
       "title": title.${locale},
       "ingress": ingress.${locale},
-      "url": slug.current
+      "url": slug.current,
+      category,
     },
   },
 }`;
@@ -113,6 +115,7 @@ export const SERVICE_GROQ = (locale = "en") => `
   "ingress": ingress.${locale},
   "url": slug.current,
   "content": content.${locale},
+  category,
 }`;
 
 export const GET_ONE_CUSTOMER_CASE = (locale = "en") => `
@@ -131,6 +134,13 @@ export const GET_ONE_SERVICE_GROQ = (locale = "en") => `
   "ingress": ingress.${locale},
   "url": slug.current,
   "content": content.${locale},
+  category,
+  duration,
+  "targetAudience": targetAudience.${locale},
+  "prerequisites": prerequisites.${locale},
+  "deliverables": deliverables.${locale},
+  "estimatedTimeline": estimatedTimeline.${locale},
+  "startingPrice": startingPrice.${locale},
 }
 `;
 export const GET_ONE_ARTICLES_GROQ = (locale = "en") => `
