@@ -1,4 +1,4 @@
-import { SERVICE_GROQ, client } from "@mi/sanity";
+import { SERVICE_CATEGORY_PAGES_GROQ, client } from "@mi/sanity";
 import { Services } from "@mi/shared/components/Services";
 import { buildMetadata } from "@mi/shared/utils/seo/metadata";
 import { translate } from "@mi/shared/utils/lang/translate";
@@ -17,6 +17,12 @@ export async function generateMetadata({
   });
 }
 
+const CATEGORY_URLS: Record<string, string> = {
+  consulting: "service/azure-consulting",
+  training: "services/training",
+  products: "services/products",
+};
+
 export default async function ServicesPage({
   params,
 }: {
@@ -24,36 +30,18 @@ export default async function ServicesPage({
 }) {
   const { locale } = await params;
   const loc = (locale || "en") as "sv" | "en";
-  const services = await client.fetch<any[]>(
-    SERVICE_GROQ(loc),
+  const categoryPages = await client.fetch<any[]>(
+    SERVICE_CATEGORY_PAGES_GROQ(loc),
     {},
     { next: { revalidate: 60 } },
   );
 
-  const consulting = services.find((s) => s.category === "consulting");
-  const trainingCount = services.filter((s) => s.category === "training").length;
-  const productsCount = services.filter((s) => s.category === "products").length;
-
-  const categoryCards = [
-    {
-      title: consulting?.title || translate("consulting", loc),
-      ingress: consulting?.ingress || translate("consulting_description", loc),
-      icon: consulting?.icon || null,
-      url: consulting ? `service/${consulting.url}` : "services",
-    },
-    {
-      title: translate("training", loc),
-      ingress: translate("training_description", loc),
-      icon: null,
-      url: "services/training",
-    },
-    {
-      title: translate("products", loc),
-      ingress: translate("products_description", loc),
-      icon: null,
-      url: "services/products",
-    },
-  ];
+  const categoryCards = categoryPages.map((cp) => ({
+    title: cp.title || translate(cp.category, loc),
+    ingress: cp.ingress || translate(`${cp.category}_description`, loc),
+    icon: cp.icon || null,
+    url: CATEGORY_URLS[cp.category] || "services",
+  }));
 
   return (
     <Services

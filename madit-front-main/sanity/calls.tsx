@@ -108,6 +108,23 @@ export const PAGE_SEO = (locale = "en") => `
   "mainImageUrl": mainImage.asset->url
 }`;
 
+export const SERVICE_CATEGORY_PAGES_GROQ = (locale = "en") => `
+*[_type == "serviceCategoryPage"] | order(category asc) {
+  category,
+  "title": title.${locale},
+  "ingress": ingress.${locale},
+  "icon": icon.asset->url,
+}`;
+
+export const SERVICE_CATEGORY_PAGE_GROQ = (locale = "en") => `
+*[_type == "serviceCategoryPage" && category == $category][0] {
+  "title": title.${locale},
+  "ingress": ingress.${locale},
+  "content": content.${locale},
+  "icon": icon.asset->url,
+  "seo": ${LOCALIZED_SEO(locale)},
+}`;
+
 export const SERVICE_GROQ = (locale = "en") => `
 *[_type == "services"] | order(order asc) {
   "title": title.${locale},
