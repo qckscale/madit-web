@@ -46,6 +46,16 @@ export function Header({ services = [] }: HeaderProps) {
     setMegaMenuOpen(false);
     setMobileServicesOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMobileServicesOpen(false);
+      setMegaMenuOpen(false);
+      setIsOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <nav
       className={`${showMenuOnScroll ? "show-menu" : undefined} ${
