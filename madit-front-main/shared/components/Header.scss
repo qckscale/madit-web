@@ -84,16 +84,18 @@ nav {
   }
 }
 
-.show-on-mob {
-  display: none;
-  @include mobile {
-    display: block;
-  }
-}
-
 // Mega-menu
 .header__services-trigger {
   position: relative;
+}
+
+.header__services-link {
+  .header__chevron {
+    display: none;
+    @include mobile {
+      display: inline;
+    }
+  }
 }
 
 .header__megamenu {
@@ -150,26 +152,12 @@ nav {
   }
 }
 
-// Mobile services submenu
-.header__services-mobile-toggle {
-  all: unset;
-  color: white;
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  text-align: left;
-
-  .header__chevron {
-    font-size: 10px;
-    transition: transform 0.2s;
-    &.is-open {
-      transform: rotate(180deg);
-    }
+.header__chevron {
+  font-size: 10px;
+  transition: transform 0.2s;
+  margin-left: 4px;
+  &.is-open {
+    transform: rotate(180deg);
   }
 }
 

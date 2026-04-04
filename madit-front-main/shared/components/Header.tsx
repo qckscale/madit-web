@@ -74,16 +74,19 @@ export function Header({ services = [] }: HeaderProps) {
             onMouseEnter={() => setMegaMenuOpen(true)}
             onMouseLeave={() => setMegaMenuOpen(false)}
           >
-            <Link href={i18Link("services", locale)} className="hide-on-mob">
-              {translate("services", locale)}
-            </Link>
-            <button
-              className="header__services-mobile-toggle show-on-mob"
-              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+            <Link
+              href={i18Link("services", locale)}
+              className="header__services-link"
+              onClick={(e) => {
+                if (window.innerWidth <= 768) {
+                  e.preventDefault();
+                  setMobileServicesOpen(!mobileServicesOpen);
+                }
+              }}
             >
               {translate("services", locale)}
               <span className={`header__chevron ${mobileServicesOpen ? "is-open" : ""}`}>&#9660;</span>
-            </button>
+            </Link>
             {megaMenuOpen && services.length > 0 && (
               <div className="header__megamenu">
                 <div className="header__megamenu__inner container-width">
