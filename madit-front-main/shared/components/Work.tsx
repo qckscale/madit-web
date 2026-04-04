@@ -7,7 +7,7 @@ import styles from "./Work.module.scss";
 export default function Work({ isHome, work, locale }: { isHome: boolean; work: any; locale: "en" | "sv" }) {
 
   return (
-    <section className={`container-width ${styles.work}`}>
+    <section className={`container-width ${isHome ? "" : "container-width-page block-mt"} ${styles.work}`}>
       <div className={`${isHome ? "d-flex justify-between" : ""}`}>
         <h2 className="heading-2">{translate("our_work", locale)}</h2>
         {isHome && (
