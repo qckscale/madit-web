@@ -91,9 +91,9 @@ export function Header({ services = [] }: HeaderProps) {
               <div className="header__megamenu">
                 <div className="header__megamenu__inner container-width">
                   <div className="header__megamenu__column">
-                    <span className="header__megamenu__heading">
+                    <Link className="header__megamenu__heading" href={i18Link("services", locale)}>
                       {translate("consulting", locale)}
-                    </span>
+                    </Link>
                     {consulting.map((s) => (
                       <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>
                         {s.title}
