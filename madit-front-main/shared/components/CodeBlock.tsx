@@ -12,7 +12,7 @@ let highlighterPromise: Promise<HighlighterCore> | null = null;
 function getHighlighter() {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighterCore({
-      themes: [import("@shikijs/themes/github-dark")],
+      themes: [import("@shikijs/themes/dark-plus")],
       langs: [
         import("@shikijs/langs/bash"),
         import("@shikijs/langs/yaml"),
@@ -51,7 +51,7 @@ export default function CodeBlock({
         const langs = highlighter.getLoadedLanguages();
         const lang = langs.includes(language!) ? language! : "powershell";
         setHtml(
-          highlighter.codeToHtml(code, { lang, theme: "github-dark" }),
+          highlighter.codeToHtml(code, { lang, theme: "dark-plus" }),
         );
       })
       .catch(() => {
