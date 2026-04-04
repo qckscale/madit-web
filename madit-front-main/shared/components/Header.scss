@@ -107,7 +107,7 @@ nav {
   z-index: 200;
   display: none;
 
-  @include desktop {
+  @media (min-width: 769px) {
     display: block;
   }
 
