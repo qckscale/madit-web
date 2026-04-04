@@ -59,6 +59,8 @@ nav {
       position: absolute;
       display: none;
       top: 100%;
+      max-height: calc(100dvh - 80px);
+      overflow-y: auto;
 
       &.is-open {
         display: block;

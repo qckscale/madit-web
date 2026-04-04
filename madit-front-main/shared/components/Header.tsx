@@ -28,7 +28,15 @@ export function Header({ services = [] }: HeaderProps) {
   const products = services.filter((s) => s.category === "products");
 
   useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
     const handleScroll = () => {
+      if (isOpen) return;
       const currentScrollPos = window.scrollY;
       setShowMenuOnScroll(currentScrollPos <= prevScrollPos);
       setPrevScrollPos(currentScrollPos);
@@ -39,7 +47,7 @@ export function Header({ services = [] }: HeaderProps) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [prevScrollPos]);
+  }, [prevScrollPos, isOpen]);
 
   useEffect(() => {
     setIsOpen(false); // eslint-disable-line react-hooks/set-state-in-effect -- intentional: close menu on navigation
