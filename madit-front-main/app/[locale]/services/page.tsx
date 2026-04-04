@@ -1,4 +1,4 @@
-import { SERVICE_CATEGORY_PAGES_GROQ, client } from "@mi/sanity";
+import { SERVICE_GROQ, client } from "@mi/sanity";
 import { Services } from "@mi/shared/components/Services";
 import { buildMetadata } from "@mi/shared/utils/seo/metadata";
 import { translate } from "@mi/shared/utils/lang/translate";
@@ -17,11 +17,7 @@ export async function generateMetadata({
   });
 }
 
-const CATEGORY_URLS: Record<string, string> = {
-  consulting: "service/azure-consulting",
-  training: "services/training",
-  products: "services/products",
-};
+const CATEGORIES = ["consulting", "training", "products"] as const;
 
 export default async function ServicesPage({
   params,
@@ -30,24 +26,33 @@ export default async function ServicesPage({
 }) {
   const { locale } = await params;
   const loc = (locale || "en") as "sv" | "en";
-  const categoryPages = await client.fetch<any[]>(
-    SERVICE_CATEGORY_PAGES_GROQ(loc),
+  const services = await client.fetch<any[]>(
+    SERVICE_GROQ(loc),
     {},
     { next: { revalidate: 60 } },
   );
 
-  const categoryCards = categoryPages.map((cp) => ({
-    title: cp.title || translate(cp.category, loc),
-    ingress: cp.ingress || translate(`${cp.category}_description`, loc),
-    icon: cp.icon || null,
-    url: CATEGORY_URLS[cp.category] || "services",
-  }));
+  const grouped = {
+    consulting: services.filter((s) => s.category === "consulting"),
+    training: services.filter((s) => s.category === "training"),
+    products: services.filter((s) => s.category === "products"),
+  };
 
   return (
-    <Services
-      services={categoryCards}
-      topMargin={false}
-      locale={loc}
-    />
+    <>
+      {CATEGORIES.map((cat) =>
+        grouped[cat].length > 0 ? (
+          <Services
+            key={cat}
+            sectionId={cat}
+            sectionTitle={translate(cat, loc)}
+            sectionDescription={translate(`${cat}_description`, loc)}
+            services={grouped[cat]}
+            topMargin={false}
+            locale={loc}
+          />
+        ) : null,
+      )}
+    </>
   );
 }

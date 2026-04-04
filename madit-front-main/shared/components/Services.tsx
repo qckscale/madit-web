@@ -54,7 +54,7 @@ export function Services({
           <Link
             className="services__item"
             key={s.title}
-            href={i18Link(`service/${s.url}`, locale)}
+            href={i18Link(s.url.includes("/") ? s.url : `service/${s.url}`, locale)}
           >
             {s.icon && (
               <Image
