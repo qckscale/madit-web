@@ -20,6 +20,7 @@ function getHighlighter() {
         import("@shikijs/langs/javascript"),
         import("@shikijs/langs/json"),
         import("@shikijs/langs/powershell"),
+        import("@shikijs/langs/python"),
         import("@shikijs/langs/terraform"),
         import("@shikijs/langs/bicep"),
       ],
