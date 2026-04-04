@@ -14,10 +14,7 @@ export default function Work({ isHome, work, locale }: { isHome: boolean; work: 
           <div>
             <Link href={i18Link("customer-case", locale)}>
               <button tabIndex={-1} className="secondary">
-                {translate("show_all", locale)}{" "}
-                <span className="hide-on-mob">
-                  {translate("customer_cases", locale)}
-                </span>
+                {translate("show_all", locale)}
               </button>
             </Link>
           </div>

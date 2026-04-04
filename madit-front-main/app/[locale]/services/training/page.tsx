@@ -48,7 +48,6 @@ export default async function TrainingPage({
       )}
       <Services
         sectionTitle={!categoryPage?.content ? (categoryPage?.title || translate("training", loc)) : undefined}
-        sectionDescription={!categoryPage?.content ? (categoryPage?.ingress || translate("training_description", loc)) : undefined}
         services={training}
         topMargin={false}
         locale={loc}

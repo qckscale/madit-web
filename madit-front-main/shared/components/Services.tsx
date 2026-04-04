@@ -37,10 +37,7 @@ export function Services({
           <div>
             <Link href={i18Link("services", locale)}>
               <button tabIndex={-1} className="secondary">
-                {translate("show_all", locale)}{" "}
-                <span className="hide-on-mob">
-                  {translate("services", locale)}
-                </span>
+                {translate("show_all", locale)}
               </button>
             </Link>
           </div>

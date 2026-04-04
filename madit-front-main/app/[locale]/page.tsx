@@ -28,7 +28,7 @@ export default async function Home({
   const { page, articles, work, authors, testimonials } = data;
 
   const categoryUrls: Record<string, string> = {
-    consulting: "service/azure-consulting",
+    consulting: "services/consulting",
     training: "services/training",
     products: "services/products",
   };

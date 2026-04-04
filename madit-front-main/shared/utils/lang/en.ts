@@ -2,7 +2,7 @@ export const en = {
   home: "Home",
   services: "What we do",
   about: "About",
-  news: "News/Blog",
+  news: "Articles",
   contact: "Contact",
   change_language: "Change language",
   full_name: "Full name",

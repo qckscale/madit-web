@@ -101,7 +101,7 @@ export function Header({ services = [] }: HeaderProps) {
               <div className="header__megamenu">
                 <div className="header__megamenu__inner container-width">
                   <div className="header__megamenu__column">
-                    <Link className="header__megamenu__heading" href={i18Link("services", locale)}>
+                    <Link className="header__megamenu__heading" href={i18Link("services/consulting", locale)}>
                       {translate("consulting", locale)}
                     </Link>
                     {consulting.map((s) => (
@@ -135,7 +135,7 @@ export function Header({ services = [] }: HeaderProps) {
             )}
             {mobileServicesOpen && (
               <div className="header__mobile-submenu">
-                <Link className="header__mobile-submenu__heading" href={i18Link("services", locale)}>{translate("consulting", locale)}</Link>
+                <Link className="header__mobile-submenu__heading" href={i18Link("services/consulting", locale)}>{translate("consulting", locale)}</Link>
                 {consulting.map((s) => (
                   <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>{s.title}</Link>
                 ))}

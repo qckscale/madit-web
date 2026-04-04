@@ -12,19 +12,19 @@ export async function generateMetadata({
   const { locale } = await params;
   const categoryPage = await client.fetch<any>(
     SERVICE_CATEGORY_PAGE_GROQ(locale),
-    { category: "products" },
+    { category: "consulting" },
     { next: { revalidate: 60 } },
   );
   return buildMetadata({
     seo: categoryPage?.seo,
-    fallbackTitle: categoryPage?.title || translate("products", locale as "sv" | "en"),
-    fallbackDescription: categoryPage?.ingress || translate("products_description", locale as "sv" | "en"),
+    fallbackTitle: categoryPage?.title || translate("consulting", locale as "sv" | "en"),
+    fallbackDescription: categoryPage?.ingress || translate("consulting_description", locale as "sv" | "en"),
     locale,
-    path: "/services/products",
+    path: "/services/consulting",
   });
 }
 
-export default async function ProductsPage({
+export default async function ConsultingPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -32,23 +32,23 @@ export default async function ProductsPage({
   const { locale } = await params;
   const loc = (locale || "en") as "sv" | "en";
   const [categoryPage, services] = await Promise.all([
-    client.fetch<any>(SERVICE_CATEGORY_PAGE_GROQ(loc), { category: "products" }, { next: { revalidate: 60 } }),
+    client.fetch<any>(SERVICE_CATEGORY_PAGE_GROQ(loc), { category: "consulting" }, { next: { revalidate: 60 } }),
     client.fetch<any[]>(SERVICE_GROQ(loc), {}, { next: { revalidate: 60 } }),
   ]);
 
-  const products = services.filter((s) => s.category === "products");
+  const consulting = services.filter((s) => s.category === "consulting");
 
   return (
     <>
       {categoryPage?.content && (
         <div className="container-width container-width-page small">
-          <h1 className="heading-2">{categoryPage.title || translate("products", loc)}</h1>
+          <h1 className="heading-2">{categoryPage.title || translate("consulting", loc)}</h1>
           <BlockContent content={categoryPage.content} />
         </div>
       )}
       <Services
-        sectionTitle={!categoryPage?.content ? (categoryPage?.title || translate("products", loc)) : undefined}
-        services={products}
+        sectionTitle={!categoryPage?.content ? (categoryPage?.title || translate("consulting", loc)) : undefined}
+        services={consulting}
         topMargin={false}
         locale={loc}
       />
