@@ -46,7 +46,6 @@ export default async function ServicesPage({
             key={cat}
             sectionId={cat}
             sectionTitle={translate(cat, loc)}
-            sectionDescription={translate(`${cat}_description`, loc)}
             services={grouped[cat]}
             topMargin={false}
             locale={loc}
