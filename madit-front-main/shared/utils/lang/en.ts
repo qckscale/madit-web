@@ -51,4 +51,5 @@ export const en = {
   interested_contact: "Interested? Contact us",
   book_training: "Book training",
   request_quote: "Request a quote",
+  instructors: "Instructor",
 };

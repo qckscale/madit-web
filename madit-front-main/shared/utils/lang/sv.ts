@@ -51,4 +51,5 @@ export const sv = {
   interested_contact: "Intresserad? Kontakta oss",
   book_training: "Boka utbildning",
   request_quote: "Begär offert",
+  instructors: "Kursledare",
 };

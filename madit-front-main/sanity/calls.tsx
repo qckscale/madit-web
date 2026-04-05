@@ -162,6 +162,8 @@ export const GET_ONE_SERVICE_GROQ = (locale = "en") => `
   "deliverables": deliverables.${locale},
   "estimatedTimeline": estimatedTimeline.${locale},
   "startingPrice": startingPrice.${locale},
+  "serviceDetails": serviceDetails[]{ "label": label.${locale}, "value": value.${locale} },
+  "instructors": instructors[]->{ name, "title": title.${locale}, "image": image.asset->url },
 }
 `;
 export const GET_ONE_ARTICLES_GROQ = (locale = "en") => `

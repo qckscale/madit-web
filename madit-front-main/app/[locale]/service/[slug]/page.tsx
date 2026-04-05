@@ -1,5 +1,6 @@
 import { GET_ONE_SERVICE_GROQ, SERVICE_SEO, client } from "@mi/sanity";
 import BlockContent from "@mi/shared/components/BlockContent";
+import Author from "@mi/shared/components/Author";
 import { buildMetadata } from "@mi/shared/utils/seo/metadata";
 import { translate } from "@mi/shared/utils/lang/translate";
 import { i18Link } from "@mi/shared/utils/lang/getLink";
@@ -69,52 +70,74 @@ export default async function ServiceDetailPage({
           </Link>
         </div>
 
-        {page.category === "training" && (page.duration || page.targetAudience || page.prerequisites) && (
+        {page.serviceDetails?.length > 0 ? (
           <div className="service-details">
-            {page.duration && (
-              <div className="service-details__item">
-                <strong>{translate("duration", loc)}</strong>
-                <span>{translate(DURATION_KEYS[page.duration] || page.duration, loc)}</span>
+            {page.serviceDetails.map((item: any, i: number) => (
+              <div key={i} className="service-details__item">
+                <strong>{item.label}</strong>
+                <span>{item.value}</span>
               </div>
-            )}
-            {page.targetAudience && (
-              <div className="service-details__item">
-                <strong>{translate("target_audience", loc)}</strong>
-                <span>{page.targetAudience}</span>
-              </div>
-            )}
-            {page.prerequisites && (
-              <div className="service-details__item">
-                <strong>{translate("prerequisites", loc)}</strong>
-                <span>{page.prerequisites}</span>
-              </div>
-            )}
+            ))}
           </div>
+        ) : (
+          <>
+            {page.category === "training" && (page.duration || page.targetAudience || page.prerequisites) && (
+              <div className="service-details">
+                {page.duration && (
+                  <div className="service-details__item">
+                    <strong>{translate("duration", loc)}</strong>
+                    <span>{translate(DURATION_KEYS[page.duration] || page.duration, loc)}</span>
+                  </div>
+                )}
+                {page.targetAudience && (
+                  <div className="service-details__item">
+                    <strong>{translate("target_audience", loc)}</strong>
+                    <span>{page.targetAudience}</span>
+                  </div>
+                )}
+                {page.prerequisites && (
+                  <div className="service-details__item">
+                    <strong>{translate("prerequisites", loc)}</strong>
+                    <span>{page.prerequisites}</span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {page.category === "products" && (page.deliverables || page.estimatedTimeline || page.startingPrice) && (
+              <div className="service-details">
+                {page.estimatedTimeline && (
+                  <div className="service-details__item">
+                    <strong>{translate("estimated_timeline", loc)}</strong>
+                    <span>{page.estimatedTimeline}</span>
+                  </div>
+                )}
+                {page.startingPrice && (
+                  <div className="service-details__item">
+                    <strong>{translate("starting_price", loc)}</strong>
+                    <span>{page.startingPrice}</span>
+                  </div>
+                )}
+                {page.deliverables && (
+                  <div className="service-details__deliverables">
+                    <strong>{translate("deliverables", loc)}</strong>
+                    <BlockContent content={page.deliverables} />
+                  </div>
+                )}
+              </div>
+            )}
+          </>
         )}
 
-        {page.category === "products" && (page.deliverables || page.estimatedTimeline || page.startingPrice) && (
-          <div className="service-details">
-            {page.estimatedTimeline && (
-              <div className="service-details__item">
-                <strong>{translate("estimated_timeline", loc)}</strong>
-                <span>{page.estimatedTimeline}</span>
-              </div>
-            )}
-            {page.startingPrice && (
-              <div className="service-details__item">
-                <strong>{translate("starting_price", loc)}</strong>
-                <span>{page.startingPrice}</span>
-              </div>
-            )}
-            {page.deliverables && (
-              <div className="service-details__deliverables">
-                <strong>{translate("deliverables", loc)}</strong>
-                <BlockContent content={page.deliverables} />
-              </div>
-            )}
-          </div>
-        )}
-
+        {page.instructors?.length > 0 && page.instructors.map((person: any) => (
+          <Author
+            key={person.name}
+            name={person.name}
+            title={person.title}
+            image={person.image}
+            label={translate("instructors", loc)}
+          />
+        ))}
       </div>
     </>
   );

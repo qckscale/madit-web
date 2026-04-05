@@ -138,6 +138,33 @@ export default defineType({
       hidden: ({document}) => document?.category !== 'products',
     }),
     defineField({
+      name: 'serviceDetails',
+      group: 'content',
+      title: 'Service Details',
+      description: 'Items shown in the details box (e.g. Längd, Målgrupp, Förkunskaper)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {name: 'label', type: 'localeString', title: 'Label'},
+            {name: 'value', type: 'localeText', title: 'Value'},
+          ],
+          preview: {
+            select: {title: 'label.sv', subtitle: 'value.sv'},
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: 'instructors',
+      group: 'content',
+      title: 'Instructors / Consultants',
+      description: 'People who lead this service or training',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'author'}]}],
+    }),
+    defineField({
       name: 'seo',
       type: 'seo',
       group: 'seo',
