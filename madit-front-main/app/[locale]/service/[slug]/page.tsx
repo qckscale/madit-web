@@ -54,6 +54,21 @@ export default async function ServiceDetailPage({
         <h1 className="heading-2">{page.title}</h1>
         <BlockContent content={page.content} />
 
+        <div className="service-cta">
+          <Link href={i18Link(`contact?service=${encodeURIComponent(page.url)}`, locale)}>
+            <button className="primary">
+              {translate(
+                page.category === "training"
+                  ? "book_training"
+                  : page.category === "products"
+                    ? "request_quote"
+                    : "interested_contact",
+                loc,
+              )}
+            </button>
+          </Link>
+        </div>
+
         {page.category === "training" && (page.duration || page.targetAudience || page.prerequisites) && (
           <div className="service-details">
             {page.duration && (
@@ -100,20 +115,6 @@ export default async function ServiceDetailPage({
           </div>
         )}
 
-        <div className="service-cta">
-          <Link href={i18Link(`contact?service=${encodeURIComponent(page.url)}`, locale)}>
-            <button className="primary">
-              {translate(
-                page.category === "training"
-                  ? "book_training"
-                  : page.category === "products"
-                    ? "request_quote"
-                    : "interested_contact",
-                loc,
-              )}
-            </button>
-          </Link>
-        </div>
       </div>
     </>
   );
