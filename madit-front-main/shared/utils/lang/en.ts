@@ -1,8 +1,8 @@
 export const en = {
   home: "Home",
-  services: "Services",
+  services: "What we do",
   about: "About",
-  news: "News/Blog",
+  news: "Articles",
   contact: "Contact",
   change_language: "Change language",
   full_name: "Full name",
@@ -29,4 +29,27 @@ export const en = {
     "See how MADIT has helped businesses transform with Azure solutions.",
   news_description:
     "Latest news, articles, and insights from MADIT's Azure consultants.",
+  consulting: "Services",
+  training: "Training",
+  products: "Deliveries",
+  consulting_description:
+    "Ongoing services for your Azure environment. Consultants by the hour or fully managed infrastructure.",
+  training_description:
+    "Training days and workshops that build competence in your organization.",
+  products_description:
+    "Ready-made deliveries with clear scope. We deploy, hand over, and you take it from there.",
+  duration: "Duration",
+  target_audience: "Target audience",
+  prerequisites: "Prerequisites",
+  deliverables: "Deliverables",
+  estimated_timeline: "Estimated timeline",
+  starting_price: "Starting price",
+  "2h": "2 hours",
+  full_day: "Full day",
+  half_day: "Half day",
+  multi_day: "Multiple days",
+  interested_contact: "Interested? Contact us",
+  book_training: "Book training",
+  request_quote: "Request a quote",
+  instructors: "Instructor",
 };

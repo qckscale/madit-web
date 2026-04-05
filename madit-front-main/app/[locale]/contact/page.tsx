@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { SERVICE_GROQ, GENERAL_SETTINGS, client } from "@mi/sanity";
 import { ContactForm } from "@mi/shared/components/ContactForm";
 import Section from "@mi/shared/components/Section";
@@ -33,7 +34,9 @@ export default async function ContactPage({
 
   return (
     <div className="container-width container-width-page">
-      <ContactForm services={services} contactImageUrl={settings.contactImageUrl} />
+      <Suspense>
+        <ContactForm services={services} contactImageUrl={settings.contactImageUrl} />
+      </Suspense>
     </div>
   );
 }

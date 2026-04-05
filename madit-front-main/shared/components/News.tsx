@@ -24,10 +24,7 @@ export function News({ articles, title, isHome = false, locale }: NewsProps) {
             <div>
               <Link href={i18Link("news", locale)}>
                 <button tabIndex={-1} className="secondary">
-                  {translate("show_all", locale)}{" "}
-                  <span className="hide-on-mob">
-                    {translate("news", locale)}
-                  </span>
+                  {translate("show_all", locale)}
                 </button>
               </Link>
             </div>

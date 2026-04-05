@@ -1,10 +1,10 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import "./ContactForm.scss";
 import { contact } from "@mi/sanity";
 import { translate } from "../utils/lang/translate";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 interface ContactFormProps {
   services: any[];
@@ -12,6 +12,7 @@ interface ContactFormProps {
 }
 export function ContactForm({ services, contactImageUrl }: ContactFormProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
   const [isSending, setIsSending] = useState(false);
   const [successful, setSuccessful] = useState(false);
@@ -21,6 +22,16 @@ export function ContactForm({ services, contactImageUrl }: ContactFormProps) {
     subject: "",
     message: "",
   });
+
+  useEffect(() => {
+    const serviceSlug = searchParams.get("service");
+    if (serviceSlug) {
+      const match = services.find((s) => s.url === serviceSlug);
+      if (match) {
+        setForm((prev) => ({ ...prev, subject: match.title }));
+      }
+    }
+  }, [searchParams, services]);
   const performContact = async (ev: FormEvent<HTMLFormElement>) => {
     setSuccessful(false);
     ev.preventDefault();
@@ -77,6 +88,7 @@ export function ContactForm({ services, contactImageUrl }: ContactFormProps) {
                   <select
                     id="subject"
                     required
+                    value={form.subject}
                     onChange={(ev) => {
                       setForm({ ...form, subject: ev.target.value });
                     }}
@@ -85,11 +97,19 @@ export function ContactForm({ services, contactImageUrl }: ContactFormProps) {
                     <option value={translate("other", locale)}>
                       {translate("other", locale)}
                     </option>
-                    {services.map((service) => (
-                      <option key={service.title} value={service.title}>
-                        {service.title}
-                      </option>
-                    ))}
+                    {(["consulting", "training", "products"] as const).map((cat) => {
+                      const catServices = services.filter((s) => s.category === cat);
+                      if (!catServices.length) return null;
+                      return (
+                        <optgroup key={cat} label={translate(cat, locale)}>
+                          {catServices.map((service) => (
+                            <option key={service.title} value={service.title}>
+                              {service.title}
+                            </option>
+                          ))}
+                        </optgroup>
+                      );
+                    })}
                   </select>
                 </div>
                 <div className="contact-form__form__input">

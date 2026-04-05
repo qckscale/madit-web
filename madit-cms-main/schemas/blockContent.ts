@@ -72,6 +72,7 @@ export default defineType({
           {title: 'JavaScript', value: 'javascript'},
           {title: 'JSON', value: 'json'},
           {title: 'PowerShell', value: 'powershell'},
+          {title: 'Python', value: 'python'},
           {title: 'Terraform', value: 'terraform'},
           {title: 'TypeScript', value: 'typescript'},
           {title: 'YAML', value: 'yaml'},

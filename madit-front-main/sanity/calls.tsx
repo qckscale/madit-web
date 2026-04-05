@@ -7,7 +7,11 @@ export const FOOTER_GROQ = (locale = "en") => `
     "title": title.${locale},
     "link": slug.current
   },
-  "copyrightText": copyrightText.${locale}, 
+  footerServices[]-> {
+    "title": title.${locale},
+    "url": slug.current,
+  },
+  "copyrightText": copyrightText.${locale},
 `;
 
 export const PAGE_GROQ = (locale = "en") => `
@@ -46,6 +50,7 @@ export const GENERAL_SETTINGS = (locale = "en") => `
   services[]-> {
     "title": title.${locale},
     "ingress": ingress.${locale},
+    category,
   }
 }`;
 
@@ -66,7 +71,8 @@ export const HOME_PAGE_SETTINGS = (locale = "en") => `
       "icon": icon.asset->url,
       "title": title.${locale},
       "ingress": ingress.${locale},
-      "url": slug.current
+      "url": slug.current,
+      category,
     },
   },
 }`;
@@ -106,6 +112,23 @@ export const PAGE_SEO = (locale = "en") => `
   "mainImageUrl": mainImage.asset->url
 }`;
 
+export const SERVICE_CATEGORY_PAGES_GROQ = (locale = "en") => `
+*[_type == "serviceCategoryPage"] | order(category asc) {
+  category,
+  "title": title.${locale},
+  "ingress": ingress.${locale},
+  "icon": icon.asset->url,
+}`;
+
+export const SERVICE_CATEGORY_PAGE_GROQ = (locale = "en") => `
+*[_type == "serviceCategoryPage" && category == $category][0] {
+  "title": title.${locale},
+  "ingress": ingress.${locale},
+  "content": content.${locale},
+  "icon": icon.asset->url,
+  "seo": ${LOCALIZED_SEO(locale)},
+}`;
+
 export const SERVICE_GROQ = (locale = "en") => `
 *[_type == "services"] | order(order asc) {
   "title": title.${locale},
@@ -113,6 +136,7 @@ export const SERVICE_GROQ = (locale = "en") => `
   "ingress": ingress.${locale},
   "url": slug.current,
   "content": content.${locale},
+  category,
 }`;
 
 export const GET_ONE_CUSTOMER_CASE = (locale = "en") => `
@@ -131,6 +155,15 @@ export const GET_ONE_SERVICE_GROQ = (locale = "en") => `
   "ingress": ingress.${locale},
   "url": slug.current,
   "content": content.${locale},
+  category,
+  duration,
+  "targetAudience": targetAudience.${locale},
+  "prerequisites": prerequisites.${locale},
+  "deliverables": deliverables.${locale},
+  "estimatedTimeline": estimatedTimeline.${locale},
+  "startingPrice": startingPrice.${locale},
+  "serviceDetails": serviceDetails[]{ "label": label.${locale}, "value": value.${locale} },
+  "instructors": instructors[]->{ name, "title": title.${locale}, "image": image.asset->url },
 }
 `;
 export const GET_ONE_ARTICLES_GROQ = (locale = "en") => `

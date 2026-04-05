@@ -23,7 +23,22 @@ export default defineConfig({
               .child(S.documentTypeList('category').title('Categories')),
             S.listItem().title('Pages').child(S.documentTypeList('page').title('Pages')),
             S.listItem().title('Authors').child(S.documentTypeList('author').title('Authors')),
-            S.listItem().title('Services').child(S.documentTypeList('services').title('Services')),
+            S.listItem()
+              .title('Services')
+              .child(
+                S.list()
+                  .title('Services')
+                  .items([
+                    S.listItem()
+                      .title('All Services')
+                      .child(S.documentTypeList('services').title('All Services')),
+                    S.listItem()
+                      .title('Category Pages')
+                      .child(
+                        S.documentTypeList('serviceCategoryPage').title('Category Pages'),
+                      ),
+                  ]),
+              ),
             S.listItem().title('Work').child(S.documentTypeList('work').title('Work')),
             S.listItem()
               .title('Testimonials')

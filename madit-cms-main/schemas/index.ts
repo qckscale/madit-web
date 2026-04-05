@@ -4,6 +4,7 @@ import post from './post'
 import author from './author'
 import page from './page'
 import services from './services'
+import serviceCategoryPage from './serviceCategoryPage'
 import generalSettings from './generalSettings'
 import footer from './footer'
 import seo from './seo'
@@ -24,6 +25,7 @@ export const schemaTypes = [
   footer,
   generalSettings,
   services,
+  serviceCategoryPage,
   page,
   cookieSettings,
   post,

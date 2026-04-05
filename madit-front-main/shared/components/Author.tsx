@@ -12,30 +12,36 @@ export default function Author({
   bio,
   image,
   publishedAt,
+  label,
 }: {
   name: string;
   title: string;
-  bio: any;
+  bio?: any;
   image: string;
-  publishedAt: string;
+  publishedAt?: string;
+  label?: string;
 }) {
   const pathname = usePathname();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
-  const date = format(new Date(publishedAt), "MMMM dd, yyyy", {
-    locale: locale === "en" ? enGB : sv,
-  });
+  const date = publishedAt
+    ? format(new Date(publishedAt), "MMMM dd, yyyy", {
+        locale: locale === "en" ? enGB : sv,
+      })
+    : null;
   return (
     <div className={styles.author}>
       <div className={styles.authorImageWrapper}>
-        <img src={`${image}?auto=format&w=100`} alt={name} />
+        <img src={`${image}?auto=format&w=240`} alt={name} />
       </div>
       <div className={styles.authorContentWrapper}>
         <div className={styles.authorMeta}>
-          <p className={styles.authorBadge}>{translate("author", locale)}</p>
-          <p className={styles.publishDate}>
-            <CalendarIcon size={16} />
-            {date}
-          </p>
+          <p className={styles.authorBadge}>{label ?? translate("author", locale)}</p>
+          {date && (
+            <p className={styles.publishDate}>
+              <CalendarIcon size={16} />
+              {date}
+            </p>
+          )}
         </div>
         <p className={styles.authorName}>{name}</p>
         <p className={styles.authorTitle}>{title}</p>

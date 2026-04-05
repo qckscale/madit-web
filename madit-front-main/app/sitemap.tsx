@@ -77,6 +77,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       staticEntry("/en/news"),
       staticEntry("/sv/contact"),
       staticEntry("/en/contact"),
+      staticEntry("/sv/services/consulting"),
+      staticEntry("/en/services/consulting"),
+      staticEntry("/sv/services/training"),
+      staticEntry("/en/services/training"),
+      staticEntry("/sv/services/products"),
+      staticEntry("/en/services/products"),
       ...sitemapSv,
       ...sitemapEn,
     ];

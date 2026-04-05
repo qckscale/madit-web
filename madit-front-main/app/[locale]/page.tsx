@@ -1,4 +1,4 @@
-import { HOMEPAGE_GROQ, client } from "@mi/sanity";
+import { HOMEPAGE_GROQ, SERVICE_CATEGORY_PAGES_GROQ, SERVICE_GROQ, client } from "@mi/sanity";
 import "./page.scss";
 import { Services } from "@mi/shared/components/Services";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import heroBg from "@mi/public/hero-bg.webp";
 import { News } from "@mi/shared/components/News";
 import { ContactForm } from "@mi/shared/components/ContactForm";
 import { i18Link } from "@mi/shared/utils/lang/getLink";
+import { translate } from "@mi/shared/utils/lang/translate";
 import Employees from "@mi/shared/components/Employees";
 import { Clouds } from "@mi/shared/icons";
 import Work from "@mi/shared/components/Work";
@@ -18,10 +19,25 @@ export default async function Home({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const [data] = await Promise.all([
+  const loc = (locale || "en") as "sv" | "en";
+  const [data, categoryPages, allServices] = await Promise.all([
     client.fetch<any>(HOMEPAGE_GROQ(locale), {}, { next: { revalidate: 60 } }),
+    client.fetch<any[]>(SERVICE_CATEGORY_PAGES_GROQ(locale), {}, { next: { revalidate: 60 } }),
+    client.fetch<any[]>(SERVICE_GROQ(locale), {}, { next: { revalidate: 60 } }),
   ]);
   const { page, articles, work, authors, testimonials } = data;
+
+  const categoryUrls: Record<string, string> = {
+    consulting: "services/consulting",
+    training: "services/training",
+    products: "services/products",
+  };
+  const categoryCards = categoryPages.map((cp: any) => ({
+    title: cp.title || translate(cp.category, loc),
+    ingress: cp.ingress || translate(`${cp.category}_description`, loc),
+    icon: cp.icon || null,
+    url: categoryUrls[cp.category] || "services",
+  }));
 
   return (
     <main className="homepage-container">
@@ -59,12 +75,12 @@ export default async function Home({
         </div>
       </section>
       <div className="inner-home">
-        <Services isHome services={page.homePage.services} locale={locale as "en" | "sv"} />
+        <Services isHome services={categoryCards} locale={loc} />
         <Work isHome work={work} locale={locale as "en" | "sv"} />
         <Clouds />
         <News isHome title={page.homePage.newsTitle} articles={articles} locale={locale as "en" | "sv"} />
         <Employees consultants={authors} locale={locale as "en" | "sv"} />
-        <ContactForm services={page.homePage.services} contactImageUrl={page.contactImageUrl} />
+        <ContactForm services={allServices} contactImageUrl={page.contactImageUrl} />
         <Testimonials
           title={page.homePage.testimonialTitle}
           subtitle={page.homePage.testimonialSubtitle}

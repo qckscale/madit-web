@@ -8,6 +8,9 @@ interface ServicesProps {
   topMargin?: boolean;
   isHome?: boolean;
   locale: "en" | "sv";
+  sectionId?: string;
+  sectionTitle?: string;
+  sectionDescription?: string;
 }
 
 export function Services({
@@ -15,34 +18,40 @@ export function Services({
   topMargin = true,
   isHome = false,
   locale,
+  sectionId,
+  sectionTitle,
+  sectionDescription,
 }: ServicesProps) {
+  const heading = sectionTitle || translate("services", locale);
+
   return (
     <section
+      id={sectionId}
       className={`services ${
         isHome ? "" : "container-width-page"
       } container-width ${topMargin ? "" : "block-mt"}`}
     >
       <div className={`${isHome ? "d-flex justify-between" : ""}`}>
-        <h2 className="heading-2">{translate("services", locale)}</h2>
+        <h2 className="heading-2">{heading}</h2>
         {isHome && (
           <div>
             <Link href={i18Link("services", locale)}>
               <button tabIndex={-1} className="secondary">
-                {translate("show_all", locale)}{" "}
-                <span className="hide-on-mob">
-                  {translate("services", locale)}
-                </span>
+                {translate("show_all", locale)}
               </button>
             </Link>
           </div>
         )}
       </div>
+      {sectionDescription && (
+        <p className="services__section-description">{sectionDescription}</p>
+      )}
       <div className="services__container ">
         {services?.map((s) => (
           <Link
             className="services__item"
             key={s.title}
-            href={i18Link(`service/${s.url}`, locale)}
+            href={i18Link(s.url.includes("/") ? s.url : `service/${s.url}`, locale)}
           >
             {s.icon && (
               <Image

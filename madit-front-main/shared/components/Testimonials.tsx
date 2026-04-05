@@ -24,7 +24,7 @@ export default function Testimonials({
           {testimonials.map((testimonial: any) => (
             <div className="list-wrapper__item" key={testimonial.thumbnail}>
               <div className={styles.testimonialContent}>
-                <Image src={`${testimonial.thumbnail}?auto=format&h=74&w=74`} alt={testimonial.name} width={74} height={74} />
+                <Image src={`${testimonial.thumbnail}?auto=format&h=180&w=180`} alt={testimonial.name} width={180} height={180} />
                 <div>
                   <h3>{testimonial.name}</h3>
                   <h4>{testimonial.title}</h4>

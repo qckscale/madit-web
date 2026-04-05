@@ -7,17 +7,14 @@ import styles from "./Work.module.scss";
 export default function Work({ isHome, work, locale }: { isHome: boolean; work: any; locale: "en" | "sv" }) {
 
   return (
-    <section className={`container-width ${styles.work}`}>
+    <section className={`container-width ${isHome ? "" : "container-width-page block-mt"} ${styles.work}`}>
       <div className={`${isHome ? "d-flex justify-between" : ""}`}>
         <h2 className="heading-2">{translate("our_work", locale)}</h2>
         {isHome && (
           <div>
             <Link href={i18Link("customer-case", locale)}>
               <button tabIndex={-1} className="secondary">
-                {translate("show_all", locale)}{" "}
-                <span className="hide-on-mob">
-                  {translate("customer_cases", locale)}
-                </span>
+                {translate("show_all", locale)}
               </button>
             </Link>
           </div>

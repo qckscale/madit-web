@@ -9,16 +9,34 @@ import { usePathname, useRouter } from "next/navigation";
 import { translate } from "../utils/lang/translate";
 import { i18Link } from "../utils/lang/getLink";
 
-export function Header() {
+interface HeaderProps {
+  services?: any[];
+}
+
+export function Header({ services = [] }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const pathname = usePathname();
   const locale = pathname.startsWith("/en") ? "en" : "sv";
   const toggleOpen = () => setIsOpen(!isOpen);
   const [showMenuOnScroll, setShowMenuOnScroll] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
+  const consulting = services.filter((s) => s.category === "consulting");
+  const training = services.filter((s) => s.category === "training");
+  const products = services.filter((s) => s.category === "products");
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
+      if (isOpen) return;
       const currentScrollPos = window.scrollY;
       setShowMenuOnScroll(currentScrollPos <= prevScrollPos);
       setPrevScrollPos(currentScrollPos);
@@ -29,11 +47,23 @@ export function Header() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [prevScrollPos]);
+  }, [prevScrollPos, isOpen]);
 
   useEffect(() => {
     setIsOpen(false); // eslint-disable-line react-hooks/set-state-in-effect -- intentional: close menu on navigation
+    setMegaMenuOpen(false);
+    setMobileServicesOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMobileServicesOpen(false);
+      setMegaMenuOpen(false);
+      setIsOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <nav
       className={`${showMenuOnScroll ? "show-menu" : undefined} ${
@@ -57,9 +87,81 @@ export function Header() {
             isOpen ? "is-open" : ""
           }`}
         >
-          <Link href={i18Link("services", locale)}>
-            {translate("services", locale)}
-          </Link>
+          <div
+            className="header__services-trigger"
+            onMouseEnter={() => setMegaMenuOpen(true)}
+            onMouseLeave={() => setMegaMenuOpen(false)}
+          >
+            <Link
+              href={i18Link("services", locale)}
+              className="header__services-link"
+              onClick={(e) => {
+                if (window.innerWidth <= 768) {
+                  e.preventDefault();
+                  setMobileServicesOpen(!mobileServicesOpen);
+                }
+              }}
+            >
+              {translate("services", locale)}
+              <span className={`header__chevron ${mobileServicesOpen ? "is-open" : ""}`}>&#9660;</span>
+            </Link>
+            {megaMenuOpen && services.length > 0 && (
+              <div className="header__megamenu">
+                <div className="header__megamenu__inner container-width">
+                  <div className="header__megamenu__column">
+                    <Link className="header__megamenu__heading" href={i18Link("services/consulting", locale)}>
+                      {translate("consulting", locale)}
+                    </Link>
+                    {consulting.map((s) => (
+                      <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="header__megamenu__column">
+                    <Link className="header__megamenu__heading" href={i18Link("services/training", locale)}>
+                      {translate("training", locale)}
+                    </Link>
+                    {training.map((s) => (
+                      <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="header__megamenu__column">
+                    <Link className="header__megamenu__heading" href={i18Link("services/products", locale)}>
+                      {translate("products", locale)}
+                    </Link>
+                    {products.map((s) => (
+                      <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+            {mobileServicesOpen && (
+              <div className="header__mobile-submenu">
+                <Link className="header__mobile-submenu__heading" href={i18Link("services/consulting", locale)}>{translate("consulting", locale)}</Link>
+                {consulting.map((s) => (
+                  <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>{s.title}</Link>
+                ))}
+                <Link className="header__mobile-submenu__heading" href={i18Link("services/training", locale)}>
+                  {translate("training", locale)}
+                </Link>
+                {training.map((s) => (
+                  <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>{s.title}</Link>
+                ))}
+                <Link className="header__mobile-submenu__heading" href={i18Link("services/products", locale)}>
+                  {translate("products", locale)}
+                </Link>
+                {products.map((s) => (
+                  <Link key={s.url} href={i18Link(`service/${s.url}`, locale)}>{s.title}</Link>
+                ))}
+              </div>
+            )}
+          </div>
           <Link href={i18Link("customer-case", locale)}>
             {translate("customer_cases", locale)}
           </Link>

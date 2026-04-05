@@ -62,7 +62,7 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
-        <Header />
+        <Header services={services} />
         {children}
         <Footer footer={settings.footer} services={services} />
         <ExternalScripts cookieSettings={settings.cookieSettings} nonce={""} />

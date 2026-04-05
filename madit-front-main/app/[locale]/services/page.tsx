@@ -17,19 +17,41 @@ export async function generateMetadata({
   });
 }
 
-export default async function Home({
+const CATEGORIES = ["consulting", "training", "products"] as const;
+
+export default async function ServicesPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const [services] = await Promise.all([
-    client.fetch<any>(SERVICE_GROQ(locale || "en"), {}, { next: { revalidate: 60 } }),
-  ]);
+  const loc = (locale || "en") as "sv" | "en";
+  const services = await client.fetch<any[]>(
+    SERVICE_GROQ(loc),
+    {},
+    { next: { revalidate: 60 } },
+  );
+
+  const grouped = {
+    consulting: services.filter((s) => s.category === "consulting"),
+    training: services.filter((s) => s.category === "training"),
+    products: services.filter((s) => s.category === "products"),
+  };
 
   return (
     <>
-      <Services topMargin={false} services={services} locale={locale as "en" | "sv"} />
+      {CATEGORIES.map((cat) =>
+        grouped[cat].length > 0 ? (
+          <Services
+            key={cat}
+            sectionId={cat}
+            sectionTitle={translate(cat, loc)}
+            services={grouped[cat]}
+            topMargin={false}
+            locale={loc}
+          />
+        ) : null,
+      )}
     </>
   );
 }
