@@ -31,7 +31,7 @@ export default function Author({
   return (
     <div className={styles.author}>
       <div className={styles.authorImageWrapper}>
-        <img src={`${image}?auto=format&w=100`} alt={name} />
+        <img src={`${image}?auto=format&w=240`} alt={name} />
       </div>
       <div className={styles.authorContentWrapper}>
         <div className={styles.authorMeta}>
