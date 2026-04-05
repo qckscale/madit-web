@@ -48,4 +48,7 @@ export const en = {
   full_day: "Full day",
   half_day: "Half day",
   multi_day: "Multiple days",
+  interested_contact: "Interested? Contact us",
+  book_training: "Book training",
+  request_quote: "Request a quote",
 };

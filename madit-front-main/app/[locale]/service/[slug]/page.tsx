@@ -2,6 +2,8 @@ import { GET_ONE_SERVICE_GROQ, SERVICE_SEO, client } from "@mi/sanity";
 import BlockContent from "@mi/shared/components/BlockContent";
 import { buildMetadata } from "@mi/shared/utils/seo/metadata";
 import { translate } from "@mi/shared/utils/lang/translate";
+import { i18Link } from "@mi/shared/utils/lang/getLink";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -97,6 +99,21 @@ export default async function ServiceDetailPage({
             )}
           </div>
         )}
+
+        <div className="service-cta">
+          <Link href={i18Link(`contact?service=${encodeURIComponent(page.url)}`, locale)}>
+            <button className="primary">
+              {translate(
+                page.category === "training"
+                  ? "book_training"
+                  : page.category === "products"
+                    ? "request_quote"
+                    : "interested_contact",
+                loc,
+              )}
+            </button>
+          </Link>
+        </div>
       </div>
     </>
   );
