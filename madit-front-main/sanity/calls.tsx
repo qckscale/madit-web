@@ -187,10 +187,10 @@ export const GET_ONE_ARTICLES_GROQ = (locale = "en") => `
 }
 `;
 
-export const ARTICLES_GROQ = (page = 0, itemsPerPage = 12, locale = "en") => `
-*[_type == "post"] | order(dateTime(publishedAt) desc) [${
+export const ARTICLES_GROQ = (page = 0, itemsPerPage = 12, locale = "en", categoryId?: string) => `
+*[_type == "post"${categoryId ? ` && "${categoryId}" in categories[]._ref` : ""}] | order(dateTime(publishedAt) desc) [${
   page * itemsPerPage
-}...${page + itemsPerPage}] {
+}...${(page + 1) * itemsPerPage}] {
   "title": title.${locale},
   "url": slug.current,
   "author": author->name,
@@ -198,7 +198,7 @@ export const ARTICLES_GROQ = (page = 0, itemsPerPage = 12, locale = "en") => `
   "thumbnail": thumbnail.asset->url,
   categories[]-> {
     title,
-    "url": slug.current
+    "_id": _id
   },
   publishedAt,
   "content": ingress.${locale}
@@ -248,6 +248,39 @@ export function contact({ name, email, subject, message }: any) {
     body: JSON.stringify({ name, email, subject, message }),
   });
 }
+
+export const ARTICLES_COUNT_GROQ = (categoryId?: string) =>
+  `count(*[_type == "post"${categoryId ? ` && "${categoryId}" in categories[]._ref` : ""}])`;
+
+export const CATEGORIES_GROQ = `*[_type == "category"] | order(title asc) { title, "_id": _id }`;
+
+export const SEARCH_GROQ = (locale = "en") => `
+{
+  "articles": *[_type == "post" && (title.${locale} match $searchTerm || ingress.${locale} match $searchTerm)] | order(dateTime(publishedAt) desc) [0...5] {
+    "title": title.${locale},
+    "url": slug.current,
+    "ingress": ingress.${locale},
+    "_type": _type
+  },
+  "services": *[_type == "services" && (title.${locale} match $searchTerm || ingress.${locale} match $searchTerm)] | order(order asc) [0...5] {
+    "title": title.${locale},
+    "url": slug.current,
+    "ingress": ingress.${locale},
+    category,
+    "_type": _type
+  },
+  "work": *[_type == "work" && (title.${locale} match $searchTerm || ingress.${locale} match $searchTerm)] [0...5] {
+    "title": title.${locale},
+    "url": slug.current,
+    "ingress": ingress.${locale},
+    "_type": _type
+  },
+  "pages": *[_type == "page" && (title.${locale} match $searchTerm)] [0...5] {
+    "title": title.${locale},
+    "url": slug.current,
+    "_type": _type
+  }
+}`;
 
 export const PAGES_SITEMAP = (locale: string) => `
 *[_type == "page"] {
