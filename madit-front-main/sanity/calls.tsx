@@ -187,8 +187,8 @@ export const GET_ONE_ARTICLES_GROQ = (locale = "en") => `
 }
 `;
 
-export const ARTICLES_GROQ = (page = 0, itemsPerPage = 12, locale = "en") => `
-*[_type == "post"] | order(dateTime(publishedAt) desc) [${
+export const ARTICLES_GROQ = (page = 0, itemsPerPage = 12, locale = "en", categoryId?: string) => `
+*[_type == "post"${categoryId ? ` && "${categoryId}" in categories[]._ref` : ""}] | order(dateTime(publishedAt) desc) [${
   page * itemsPerPage
 }...${(page + 1) * itemsPerPage}] {
   "title": title.${locale},
@@ -198,7 +198,7 @@ export const ARTICLES_GROQ = (page = 0, itemsPerPage = 12, locale = "en") => `
   "thumbnail": thumbnail.asset->url,
   categories[]-> {
     title,
-    "url": slug.current
+    "_id": _id
   },
   publishedAt,
   "content": ingress.${locale}
@@ -249,7 +249,10 @@ export function contact({ name, email, subject, message }: any) {
   });
 }
 
-export const ARTICLES_COUNT_GROQ = `count(*[_type == "post"])`;
+export const ARTICLES_COUNT_GROQ = (categoryId?: string) =>
+  `count(*[_type == "post"${categoryId ? ` && "${categoryId}" in categories[]._ref` : ""}])`;
+
+export const CATEGORIES_GROQ = `*[_type == "category"] | order(title asc) { title, "_id": _id }`;
 
 export const SEARCH_GROQ = (locale = "en") => `
 {

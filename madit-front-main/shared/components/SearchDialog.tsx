@@ -184,6 +184,21 @@ export function SearchDialog({ locale }: SearchDialogProps) {
 
   const hasEmptyResults = results && !hasResults && query.length >= 2;
 
+  const SearchIcon = ({ size = 24 }: { size?: number }) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="inherit"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.5 2C5.806 2 2 5.806 2 10.5S5.806 19 10.5 19c2.17 0 4.16-.814 5.67-2.152l4.49 4.49a1 1 0 0 0 1.414-1.414l-4.49-4.49A8.46 8.46 0 0 0 19 10.5C19 5.806 15.194 2 10.5 2Zm0 2a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13Z"
+        fill="inherit"
+      />
+    </svg>
+  );
+
   if (!isOpen) {
     return (
       <button
@@ -191,19 +206,7 @@ export function SearchDialog({ locale }: SearchDialogProps) {
         onClick={open}
         aria-label={translate("search", locale)}
       >
-        <svg
-          width={22}
-          height={22}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
+        <SearchIcon />
         <span className="search-trigger__shortcut">{shortcutLabel}</span>
       </button>
     );
@@ -220,20 +223,9 @@ export function SearchDialog({ locale }: SearchDialogProps) {
         aria-label={translate("search", locale)}
       >
         <div className="search-dialog__input-wrapper">
-          <svg
-            className="search-dialog__icon"
-            width={20}
-            height={20}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
+          <span className="search-dialog__icon">
+            <SearchIcon size={20} />
+          </span>
           <input
             ref={inputRef}
             type="text"
@@ -320,19 +312,7 @@ export function SearchDialog({ locale }: SearchDialogProps) {
         onClick={open}
         aria-label={translate("search", locale)}
       >
-        <svg
-          width={22}
-          height={22}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
+        <SearchIcon />
         <span className="search-trigger__shortcut">{shortcutLabel}</span>
       </button>
       {createPortal(overlay, document.body)}

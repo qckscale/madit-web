@@ -62,4 +62,5 @@ export const en = {
   previous: "Previous",
   next: "Next",
   page_of: "Page {current} of {total}",
+  all: "All",
 };

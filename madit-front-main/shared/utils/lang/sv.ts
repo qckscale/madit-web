@@ -62,4 +62,5 @@ export const sv = {
   previous: "Föregående",
   next: "Nästa",
   page_of: "Sida {current} av {total}",
+  all: "Alla",
 };

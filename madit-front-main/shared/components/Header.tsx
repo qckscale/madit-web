@@ -182,6 +182,7 @@ export function Header({ services = [] }: HeaderProps) {
         </li>
         <li className="buger-item">
           <div className="d-flex align-center">
+            <SearchDialog locale={locale as "sv" | "en"} />
             <LanguageSelector locale={locale} headerBg={false} />
             <button
               aria-label="Toggle navigation menu"

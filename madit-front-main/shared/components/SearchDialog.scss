@@ -5,6 +5,7 @@
   align-items: center;
   gap: 8px;
   color: white;
+  fill: white;
   cursor: pointer;
 
   &:hover {
@@ -66,6 +67,9 @@
 .search-dialog__icon {
   flex-shrink: 0;
   color: rgba(255, 255, 255, 0.5);
+  fill: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
 }
 
 .search-dialog__input {
@@ -73,6 +77,8 @@
   background: none;
   border: none;
   outline: none;
+  padding: 0;
+  margin: 0;
   color: white;
   font-size: 18px;
   font-family: inherit;
@@ -89,6 +95,8 @@
   kbd {
     font-family: inherit;
     font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    background: none;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     padding: 2px 8px;
@@ -96,6 +104,10 @@
 
   &:hover {
     color: white;
+
+    kbd {
+      color: white;
+    }
   }
 }
 
@@ -148,7 +160,7 @@
   flex-direction: column;
   gap: 2px;
   width: 100%;
-  padding: 10px 20px;
+  padding: 12px 20px 12px 32px;
   text-align: left;
   cursor: pointer;
   transition: background 0.1s;

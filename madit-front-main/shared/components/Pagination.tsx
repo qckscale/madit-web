@@ -7,6 +7,7 @@ interface PaginationProps {
   currentPage: number;
   totalPages: number;
   locale: string;
+  category?: string;
 }
 
 function getPageNumbers(current: number, total: number): (number | "...")[] {
@@ -35,11 +36,16 @@ function getPageNumbers(current: number, total: number): (number | "...")[] {
   return pages;
 }
 
-export function Pagination({ currentPage, totalPages, locale }: PaginationProps) {
+export function Pagination({ currentPage, totalPages, locale, category }: PaginationProps) {
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
-  const pageLink = (page: number) =>
-    page === 1 ? i18Link("news", locale) : i18Link(`news?page=${page}`, locale);
+  const pageLink = (page: number) => {
+    const params = new URLSearchParams();
+    if (page > 1) params.set("page", String(page));
+    if (category) params.set("category", category);
+    const qs = params.toString();
+    return i18Link(qs ? `news?${qs}` : "news", locale);
+  };
 
   return (
     <nav className="pagination container-width" aria-label="Pagination">
