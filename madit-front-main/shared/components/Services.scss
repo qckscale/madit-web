@@ -7,6 +7,12 @@
     margin-top: calc(100vh + 300px);
   }
   margin-bottom: 120px;
+  &.block-mt {
+    margin-bottom: 80px;
+    &.container-width-page {
+      padding-bottom: 0;
+    }
+  }
 
   .services__section-description {
     font-size: 16px;
