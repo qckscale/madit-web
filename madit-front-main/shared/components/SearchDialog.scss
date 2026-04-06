@@ -1,19 +1,18 @@
 @use "../../app/variables.scss" as *;
 
 .search-trigger {
+  all: unset;
   display: flex;
   align-items: center;
-  gap: 12px;
+  flex-wrap: nowrap;
+  gap: 8px;
   color: white;
   cursor: pointer;
-  margin-right: 4px;
+  white-space: nowrap;
+  box-sizing: border-box;
 
   &:hover {
     opacity: 0.8;
-  }
-
-  .search-icon {
-    display: block;
   }
 
   .search-trigger__shortcut {
@@ -93,8 +92,10 @@
 }
 
 .search-dialog__close {
+  all: unset;
   color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
+  box-sizing: border-box;
 
   kbd {
     font-family: inherit;
@@ -160,11 +161,13 @@
 }
 
 .search-dialog__result {
+  all: unset;
   display: flex;
   flex-direction: column;
   gap: 4px;
   width: 100%;
   padding: 12px 24px 12px 36px;
+  box-sizing: border-box;
   text-align: left;
   cursor: pointer;
   transition: background 0.1s;

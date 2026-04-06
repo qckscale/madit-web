@@ -186,16 +186,16 @@ export function SearchDialog({ locale }: SearchDialogProps) {
 
   const SearchIcon = ({ size = 24 }: { size?: number }) => (
     <svg
-      className="search-icon"
+      className="language"
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="none"
+      fill="inherit"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M10.5 2C5.806 2 2 5.806 2 10.5S5.806 19 10.5 19c2.17 0 4.16-.814 5.67-2.152l4.49 4.49a1 1 0 0 0 1.414-1.414l-4.49-4.49A8.46 8.46 0 0 0 19 10.5C19 5.806 15.194 2 10.5 2Zm0 2a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13Z"
-        fill="currentColor"
+        fill="inherit"
       />
     </svg>
   );
@@ -203,7 +203,7 @@ export function SearchDialog({ locale }: SearchDialogProps) {
   if (!isOpen) {
     return (
       <button
-        className="search-trigger unstyled"
+        className="search-trigger"
         onClick={open}
         aria-label={translate("search", locale)}
       >
@@ -237,7 +237,7 @@ export function SearchDialog({ locale }: SearchDialogProps) {
             aria-label={translate("search", locale)}
           />
           <button
-            className="search-dialog__close unstyled"
+            className="search-dialog__close"
             onClick={close}
             aria-label="Close"
           >
@@ -267,7 +267,7 @@ export function SearchDialog({ locale }: SearchDialogProps) {
                     return (
                       <button
                         key={`${group.key}-${item.url}`}
-                        className={`search-dialog__result unstyled ${
+                        className={`search-dialog__result ${
                           idx === activeIndex
                             ? "search-dialog__result--active"
                             : ""
@@ -309,7 +309,7 @@ export function SearchDialog({ locale }: SearchDialogProps) {
   return (
     <>
       <button
-        className="search-trigger unstyled"
+        className="search-trigger"
         onClick={open}
         aria-label={translate("search", locale)}
       >
