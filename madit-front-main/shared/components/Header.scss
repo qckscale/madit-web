@@ -193,6 +193,9 @@ nav {
   @include mobile {
     display: block;
   }
+  .d-flex {
+    gap: 16px;
+  }
   .burger {
     all: unset;
     height: 50px;
