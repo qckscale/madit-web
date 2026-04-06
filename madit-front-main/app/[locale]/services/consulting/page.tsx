@@ -41,7 +41,7 @@ export default async function ConsultingPage({
   return (
     <>
       {categoryPage?.content && (
-        <div className="container-width container-width-page small">
+        <div className="container-width container-width-page small" style={{ paddingBottom: 40 }}>
           <h1 className="heading-2">{categoryPage.title || translate("consulting", loc)}</h1>
           <BlockContent content={categoryPage.content} />
         </div>

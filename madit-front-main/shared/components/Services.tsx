@@ -27,9 +27,7 @@ export function Services({
   return (
     <section
       id={sectionId}
-      className={`services ${
-        isHome ? "" : "container-width-page"
-      } container-width ${topMargin ? "" : "block-mt"}`}
+      className={`services container-width ${topMargin ? "" : "block-mt"}`}
     >
       <div className={`${isHome ? "d-flex justify-between" : ""}`}>
         <h2 className="heading-2">{heading}</h2>
