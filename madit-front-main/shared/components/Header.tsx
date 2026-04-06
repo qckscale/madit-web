@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { translate } from "../utils/lang/translate";
 import { i18Link } from "../utils/lang/getLink";
+import { SearchDialog } from "./SearchDialog";
 
 interface HeaderProps {
   services?: any[];
@@ -174,6 +175,7 @@ export function Header({ services = [] }: HeaderProps) {
           <Link href={i18Link("contact", locale)}>
             {translate("contact", locale)}
           </Link>
+          <SearchDialog locale={locale as "sv" | "en"} />
           <div className="hide-on-mob">
             <LanguageSelector size={24} headerBg={false} locale={locale} />
           </div>
