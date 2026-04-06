@@ -83,6 +83,11 @@ skills-lock.json
 *.tar.gz
 **/*.tar.gz
 
+# Project documentation (local only)
+CLAUDE.md
+PROJECT.md
+
 .mcp.json
 .playwright-mcp/
 madit-front-main/scripts/content/
+madit-front-main/scripts/run-all-patches.sh
