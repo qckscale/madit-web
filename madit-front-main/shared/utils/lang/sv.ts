@@ -2,7 +2,7 @@ export const sv = {
   home: "Hem",
   services: "Vad vi gör",
   about: "Om oss",
-  news: "Artiklar",
+  news: "Nyheter",
   contact: "Kontakt",
   change_language: "Byt språk",
   full_name: "Fullständigt namn",
