@@ -3,6 +3,10 @@
 .news {
   margin-bottom: 120px;
 
+  &.container-width-page {
+    margin-bottom: 40px;
+  }
+
   .news__container {
     display: flex;
     gap: 30px;
