@@ -194,13 +194,12 @@ nav {
     display: block;
   }
   .d-flex {
-    gap: 16px;
+    gap: 24px;
   }
   .burger {
     all: unset;
     height: 50px;
     display: inline;
-    margin-left: 24px;
 
     &.is-open {
       .burger-line:first-of-type {
